@@ -10,6 +10,12 @@ use App\Http\Controllers\Controller;
 class AppointmentController extends Controller
 {
     private $appointment;
+    private $validInputConditions = array(
+        'name' => 'required',
+        'phoneNumber' => 'required|min:5',
+        'when' => 'required|date_format:Y/m/d H:i'
+    );
+
     /**
      * Display a listing of the resource.
      *
@@ -38,6 +44,18 @@ class AppointmentController extends Controller
      */
     public function store()
     {
-        //
+        $appointmentFromRequest = array('name'        => \Input::get('name'),
+                                        'phoneNumber' => \Input::get('phone'),
+                                        'when'        => \Input::get('when'));
+        $validator = \Validator::make($appointmentFromRequest, $this->validInputConditions);
+
+        if($validator->passes()) {
+            $newAppointment = new \App\Appointment;
+            $newAppointment->name = $appointmentFromRequest['name'];
+            $newAppointment->phoneNumber = $appointmentFromRequest['phoneNumber'];
+            $newAppointment->when= $appointmentFromRequest['when'];
+
+            $newAppointment->save();
+        }
     }
 }
