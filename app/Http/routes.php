@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('appointment/new', ['as' => 'appointment.new', 'uses' => 'AppointmentController@create']);
+Route::post('appointment', ['as' => 'appointment.store', 'uses' => 'AppointmentController@store']);
+Route::get('appointment', 'AppointmentController@index');

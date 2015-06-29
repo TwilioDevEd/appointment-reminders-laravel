@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ URL::asset('vendor/datetimepicker/jquery.datetimepicker.css') }}"></script>
         <title>Appointment reminders - @yield('title', 'reminders')</title>
     </head>
     <body>
@@ -16,5 +17,6 @@
         </footer>
         <script src="{{ URL::asset('vendor/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ URL::asset('vendor/datetimepicker/jquery.datetimepicker.js') }}"></script>
+        @yield('scripts')
     </body>
 </html>
