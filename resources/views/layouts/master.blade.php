@@ -14,5 +14,7 @@
             Made with <i class="fa fa-heart"></i> by your pals
             <a href="http://www.twilio.com">@twilio</a>
         </footer>
+        <script src="{{ URL::asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ URL::asset('vendor/datetimepicker/jquery.datetimepicker.js') }}"></script>
     </body>
 </html>
