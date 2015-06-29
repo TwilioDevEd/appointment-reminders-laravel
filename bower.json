@@ -1,0 +1,6 @@
+{
+  "name": "appointment-reminders-laravel",
+  "dependencies": {
+    "bootstrap": "~3.3"
+  }
+}
