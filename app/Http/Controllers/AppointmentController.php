@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -13,7 +14,8 @@ class AppointmentController extends Controller
     private $validInputConditions = array(
         'name' => 'required',
         'phoneNumber' => 'required|min:5',
-        'when' => 'required|date_format:Y/m/d H:i'
+        'when' => 'required|date_format:Y/m/d G:i',
+        'delta' => 'numeric'
     );
 
     /**
@@ -23,7 +25,6 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -34,7 +35,7 @@ class AppointmentController extends Controller
     public function create()
     {
         $appointment = new \App\Appointment;
-        return \View::make('appointment', array('appointment' => $appointment));
+        return \View::make('appointment.new', array('appointment' => $appointment));
     }
 
     /**
@@ -42,20 +43,17 @@ class AppointmentController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $appointmentFromRequest = array('name'        => \Input::get('name'),
-                                        'phoneNumber' => \Input::get('phone'),
-                                        'when'        => \Input::get('when'));
-        $validator = \Validator::make($appointmentFromRequest, $this->validInputConditions);
+        $this->validate($request, $this->validInputConditions);
+        $newAppointment = new \App\Appointment;
 
-        if($validator->passes()) {
-            $newAppointment = new \App\Appointment;
-            $newAppointment->name = $appointmentFromRequest['name'];
-            $newAppointment->phoneNumber = $appointmentFromRequest['phoneNumber'];
-            $newAppointment->when= $appointmentFromRequest['when'];
+        $newAppointment->name = $request->input('name');
+        $newAppointment->phoneNumber = $request->input('phoneNumber');
+        $newAppointment->when = $request->input('when');
+        $newAppointment->delta = $request->input('delta');
 
-            $newAppointment->save();
-        }
+        $newAppointment->save();
+        return \Response::view('appointment.index', array(), 201);
     }
 }

@@ -17,4 +17,4 @@ Route::get('/', function () {
 
 Route::get('appointment/new', ['as' => 'appointment.new', 'uses' => 'AppointmentController@create']);
 Route::post('appointment', ['as' => 'appointment.store', 'uses' => 'AppointmentController@store']);
-Route::get('appointment', 'AppointmentController@index');
+Route::get('appointment', ['as' => 'appointment.index', 'uses' => 'AppointmentController@index']);

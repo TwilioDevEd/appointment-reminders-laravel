@@ -6,7 +6,15 @@
     </head>
     <body>
         <nav class="navbar navbar-default">
-            <a class="navbar-brand" href="#">Appointment reminders</a>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Appointment reminders</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ route('appointment.index') }}">Index</a></li>
+                    <li><a href="{{ route('appointment.new') }}">New appointment</a></li>
+                </ul>
+            </div>
         </nav>
         <div class="container">
             @yield('content')
