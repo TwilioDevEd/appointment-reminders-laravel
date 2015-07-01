@@ -15,7 +15,7 @@ class AppointmentController extends Controller
         'name' => 'required',
         'phoneNumber' => 'required|min:5',
         'when' => 'required',
-        'delta' => 'numeric'
+        'delta' => 'required|numeric'
     );
 
     /**
@@ -56,7 +56,7 @@ class AppointmentController extends Controller
         $newAppointment->delta = $request->input('delta');
 
         $newAppointment->save();
-        return \Response::view('appointment.index', array(), 201);
+        return redirect()->route('appointment.index');
     }
 
     /**

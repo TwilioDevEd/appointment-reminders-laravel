@@ -17,17 +17,18 @@
             <td> {{ $apt->name }}</td>
             <td> {{ $apt->phoneNumber }}</td>
             <td> {{ $apt->when }}</td>
-            <td>{{ $apt->delta }} minute(s)</td>
+            <td> {{ $apt->delta }} minute(s)</td>
             <td>
-                {!! Form::open(array('route' => array('appointment.delete', $apt->id), 'method' => 'delete')) !!}
+                {!! Form::open(array('route' => ['appointment.delete'], 'method' => 'DELETE')) !!}
+                <input type='hidden' name="id" value={{ $apt->id }} />
                 <button type="submit" class="btn btn-danger btn-mini">Delete</button>
                 {!! Form::close() !!}
             </td>
         </tr>
     @empty
-        No appointments scheduled
-    @endforelse
     </tbody>
+    No appointments scheduled
+    @endforelse
 </table>
 
 @stop
