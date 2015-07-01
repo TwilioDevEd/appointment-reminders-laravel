@@ -68,4 +68,9 @@ class AppointmentController extends Controller
         \App\Appointment::find($request->input('id'))->delete();
         return redirect()->route('appointment.index');
     }
+
+    public function change($id) {
+        $appointmentToEdit = \App\Appointment::find($id);
+        return \View::make('appointment.edit', array('appointment' => $appointmentToEdit));
+    }
 }
