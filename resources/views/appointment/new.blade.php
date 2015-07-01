@@ -12,7 +12,7 @@
                     @endforeach
                 </div>
             @endunless
-            {!! Form::model($appointment, array('route' => 'appointment.store')) !!}
+            {!! Form::model($appointment, array('route' => 'appointment.store', 'id' => 'new-appointment')) !!}
                 <div class="form-group">
                       {!! Form::label('name', 'Name') !!}
                       {!! Form::text('name', null, array('class' => 'form-control',

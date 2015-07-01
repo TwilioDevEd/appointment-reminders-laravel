@@ -14,7 +14,7 @@ class AppointmentController extends Controller
     private $validInputConditions = array(
         'name' => 'required',
         'phoneNumber' => 'required|min:5',
-        'when' => 'required|date_format:Y/m/d G:i',
+        'when' => 'required',
         'delta' => 'numeric'
     );
 

@@ -1,3 +1,7 @@
 $(document).ready(function() {
-    $('#time-of-appointment').datetimepicker({ mask: true });
+    $('input#time-of-appointment').datetimepicker();
+    $('form#new-appointment').submit(function() {
+        var appointmentInISOFormat = new Date($('input#time-of-appointment').val()).toISOString();
+        $('input#time-of-appointment').val(appointmentInISOFormat);
+    });
 });

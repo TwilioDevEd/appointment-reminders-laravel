@@ -17,7 +17,7 @@
             <td> {{ $apt->name }}</td>
             <td> {{ $apt->phoneNumber }}</td>
             <td> {{ $apt->when }}</td>
-            <td> {{ $apt->delta }}</td>
+            <td>{{ $apt->delta }} minute(s)</td>
             <td>
                 {!! Form::open(array('route' => array('appointment.delete', $apt->id), 'method' => 'delete')) !!}
                 <button type="submit" class="btn btn-danger btn-mini">Delete</button>
