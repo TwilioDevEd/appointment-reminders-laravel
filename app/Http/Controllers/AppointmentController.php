@@ -25,6 +25,8 @@ class AppointmentController extends Controller
      */
     public function index()
     {
+        $allAppointments = \App\Appointment::all();
+        return response()->view('appointment.index', array('apts' => $allAppointments));
     }
 
     /**
@@ -55,5 +57,15 @@ class AppointmentController extends Controller
 
         $newAppointment->save();
         return \Response::view('appointment.index', array(), 201);
+    }
+
+    /**
+     * Delete a resource in storage.
+     *
+     * @return Response
+     */
+    public function delete(Request $request) {
+        \App\Appointment::find($request->input('id'))->delete();
+        return redirect()->route('appointment.index');
     }
 }
