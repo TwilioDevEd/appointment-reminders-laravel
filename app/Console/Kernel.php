@@ -26,5 +26,15 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('inspire')
                  ->hourly();
+
+        $schedule->call(function() {
+            $allAppointments = \App\Appointment::all();
+            $appointmentsFinder = new \App\AppointmentReminders\AppointmentFinder($allAppointments);
+            $matchingAppointments = $appointmentsFinder->findMatchingAppointments();
+            $appointmentReminder = new \App\AppointmentReminders\AppointmentReminder($matchingAppointments);
+
+            $appointmentReminder->sendReminders();
+
+        })->everyMinute();
     }
 }
