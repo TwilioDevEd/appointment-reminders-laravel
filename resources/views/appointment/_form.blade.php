@@ -1,6 +1,6 @@
 <div class="col-md-4 col-lg-4">
+    <h2>{{ $heading }}</h2>
     <div class="panel panel-default">
-        <div class="panel-heading">{{ $heading }}</div>
         <div class="panel-body">
             @unless ($errors->isEmpty())
                 <div class="alert alert-danger" role="alert">
@@ -9,7 +9,7 @@
                     @endforeach
                 </div>
             @endunless
-            {!! Form::model($appointment, array('route' => $actionRoute, 'method' => $method, 'id' => 'new-appointment')) !!}
+            {!! Form::model($appointment, array('route' => $route, 'method' => $method, 'id' => 'new-appointment')) !!}
             <div class="form-group">
                 {!! Form::label('name', 'Name') !!}
                 {!! Form::text('name', null, array('class' => 'form-control',

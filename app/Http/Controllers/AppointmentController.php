@@ -25,7 +25,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $allAppointments = \App\Appointment::all();
+        $allAppointments = \App\Appointment::orderBy('id', 'ASC')->get();
         return response()->view('appointment.index', array('apts' => $allAppointments));
     }
 
@@ -37,7 +37,7 @@ class AppointmentController extends Controller
     public function create()
     {
         $appointment = new \App\Appointment;
-        return \View::make('appointment.new', array('appointment' => $appointment));
+        return \View::make('appointment.create', array('appointment' => $appointment));
     }
 
     /**
@@ -47,14 +47,7 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->validInputConditions);
-        $newAppointment = new \App\Appointment;
-
-        $newAppointment->name = $request->input('name');
-        $newAppointment->phoneNumber = $request->input('phoneNumber');
-        $newAppointment->when = $request->input('when');
-        $newAppointment->delta = $request->input('delta');
-
+        $newAppointment = $this->appointmentFromRequest($request);
         $newAppointment->save();
         return redirect()->route('appointment.index');
     }
@@ -64,13 +57,38 @@ class AppointmentController extends Controller
      *
      * @return Response
      */
-    public function delete(Request $request) {
-        \App\Appointment::find($request->input('id'))->delete();
+    public function destroy($id) {
+        \App\Appointment::find($id)->delete();
         return redirect()->route('appointment.index');
     }
 
-    public function change($id) {
+    public function edit($id) {
         $appointmentToEdit = \App\Appointment::find($id);
         return \View::make('appointment.edit', array('appointment' => $appointmentToEdit));
+    }
+
+    public function update(Request $request, $id) {
+        $updatedAppointment = $this->appointmentFromRequest($request);
+        $existingAppointment = \App\Appointment::find($id);
+
+        $existingAppointment->name = $updatedAppointment->name;
+        $existingAppointment->phoneNumber = $updatedAppointment->phoneNumber;
+        $existingAppointment->when = $updatedAppointment->when;
+        $existingAppointment->delta = $updatedAppointment->delta;
+
+        $existingAppointment->save();
+        return redirect()->route('appointment.index');
+    }
+
+    private function appointmentFromRequest(Request $request) {
+        $this->validate($request, $this->validInputConditions);
+        $newAppointment = new \App\Appointment;
+
+        $newAppointment->name = $request->input('name');
+        $newAppointment->phoneNumber = $request->input('phoneNumber');
+        $newAppointment->when = $request->input('when');
+        $newAppointment->delta = $request->input('delta');
+
+        return $newAppointment;
     }
 }

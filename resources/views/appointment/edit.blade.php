@@ -2,7 +2,7 @@
 
 @section('content')
     @include('appointment._form', array('heading' => 'Edit appointment',
-                                        'actionRoute' => ['appointment.delete', $appointment->appointmentId],
+                                        'route' => array('appointment.update', $appointment->id),
                                         'submitText' => 'Edit',
                                         'method' => 'PUT'))
 @stop

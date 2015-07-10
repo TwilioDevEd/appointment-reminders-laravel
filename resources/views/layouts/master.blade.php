@@ -12,7 +12,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('appointment.index') }}">Index</a></li>
-                    <li><a href="{{ route('appointment.new') }}">New appointment</a></li>
+                    <li><a href="{{ route('appointment.create') }}">New appointment</a></li>
                 </ul>
             </div>
         </nav>
