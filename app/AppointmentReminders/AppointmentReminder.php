@@ -2,6 +2,8 @@
 
 namespace App\AppointmentReminders;
 
+use Illuminate\Log;
+
 class AppointmentReminder
 {
     /**
@@ -25,7 +27,6 @@ class AppointmentReminder
     }
 
     private function remindAbout($appointment) {
-        Log::info('Sending reminder about: ' . var_dump($appointment));
         // Write appointment logic here
     }
 }
