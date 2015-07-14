@@ -19,6 +19,7 @@ class AppointmentControllerTest extends TestCase
         $response = $this->call('POST', '/appointment', ['name' => 'Erich Gamma',
                                          'phoneNumber' => '6692216251',
                                          'when' => '2015-07-24T18:00:00.000Z',
+                                         'timezoneOffset' => '300',
                                          '_token' => csrf_token(),
                                          'delta' => '15']);
 
@@ -40,6 +41,7 @@ class AppointmentControllerTest extends TestCase
         $response = $this->call('POST', '/appointment', ['name' => 'Erich Gamma',
                                          'phoneNumber' => '',
                                          'when' => '2015-07-24T18:00:00.000Z',
+                                         'timezoneOffset' => '300',
                                          '_token' => csrf_token(),
                                          'delta' => '15']);
 
@@ -62,6 +64,7 @@ class AppointmentControllerTest extends TestCase
         $newAppointment->phoneNumber = '6692216251';
         $newAppointment->when = '2015-07-24T18:00:00.000Z';
         $newAppointment->delta = '15';
+        $newAppointment->timezoneOffset = '300';
         $newAppointment->save();
 
         $idToDelete = $newAppointment->id;
