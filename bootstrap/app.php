@@ -26,8 +26,6 @@ $app = new Illuminate\Foundation\Application(
 |
 */
 
-Dotenv::load(base_path());
-Dotenv::required(['TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN', 'TWILIO_SENDING_NUMBER']);
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
@@ -43,6 +41,8 @@ $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
 );
+
+Dotenv::required(['TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN', 'TWILIO_SENDING_NUMBER']);
 
 /*
 |--------------------------------------------------------------------------
