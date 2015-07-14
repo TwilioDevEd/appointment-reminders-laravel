@@ -1,8 +1,0 @@
-{
-  "name": "appointment-reminders-laravel",
-  "dependencies": {
-      "bootstrap": "~3.3",
-      "datetimepicker": "~2.4",
-      "jquery": "~2.1"
-  }
-}

@@ -1,7 +1,7 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="{{ URL::asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}"></script>
-        <link rel="stylesheet" type="text/css" href="{{ URL::asset('vendor/datetimepicker/jquery.datetimepicker.css') }}"></script>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
         <title>Appointment reminders - @yield('title', 'reminders')</title>
     </head>
     <body>
@@ -23,8 +23,10 @@
             Made with <i class="fa fa-heart"></i> by your pals
             <a href="http://www.twilio.com">@twilio</a>
         </footer>
-        <script src="{{ URL::asset('vendor/jquery/dist/jquery.min.js') }}"></script>
-        <script src="{{ URL::asset('vendor/datetimepicker/jquery.datetimepicker.js') }}"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
         @yield('scripts')
     </body>
 </html>
