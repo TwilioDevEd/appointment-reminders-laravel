@@ -31,7 +31,7 @@ class AppointmentFinder
 
     private function isAppointmentWithinAMinute($appointment) {
         $now = Carbon::now();
-        $inAMinute = Carbon::now()->addMinute();
+        $inTenMinute = Carbon::now()->addMinutes(10);
         $appointmentTime = Carbon::parse($appointment->when, 'UTC');
         $appointmentReminderTime = $appointmentTime->subMinutes($appointment->delta);
 
