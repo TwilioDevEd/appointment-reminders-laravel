@@ -24,10 +24,12 @@
                                                           'type' => 'tel')) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('when', 'Appointment time') !!}
-                {!! Form::text('when', null, array('class' => 'form-control',
+                {!! Form::label('whenLocal', 'Appointment time') !!}
+                {!! Form::text('whenLocal', null, array('class' => 'form-control',
                                                    'placeholder' => 'Time of appointment',
-                                                   'type' => 'text', 'id' => 'time-of-appointment')) !!}
+                                                   'type' => 'text', 'id' => 'time-of-appointment-local')) !!}
+                {!! Form::hidden('when', null, array('id' => 'time-of-appointment')) !!}
+                {!! Form::hidden('timezoneOffset', null, array('id' => 'user-timezone')) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('delta', 'Notification time') !!}

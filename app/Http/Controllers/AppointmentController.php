@@ -15,6 +15,7 @@ class AppointmentController extends Controller
         'name' => 'required',
         'phoneNumber' => 'required|min:5',
         'when' => 'required',
+        'timezoneOffset' => 'required',
         'delta' => 'required|numeric'
     );
 
@@ -73,6 +74,7 @@ class AppointmentController extends Controller
 
         $existingAppointment->name = $updatedAppointment->name;
         $existingAppointment->phoneNumber = $updatedAppointment->phoneNumber;
+        $existingAppointment->timezoneOffset = $updatedAppointment->timezoneOffset;
         $existingAppointment->when = $updatedAppointment->when;
         $existingAppointment->delta = $updatedAppointment->delta;
 
@@ -86,6 +88,7 @@ class AppointmentController extends Controller
 
         $newAppointment->name = $request->input('name');
         $newAppointment->phoneNumber = $request->input('phoneNumber');
+        $newAppointment->timezoneOffset = $request->input('timezoneOffset');
         $newAppointment->when = $request->input('when');
         $newAppointment->delta = $request->input('delta');
 

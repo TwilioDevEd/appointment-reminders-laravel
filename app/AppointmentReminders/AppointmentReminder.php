@@ -3,6 +3,7 @@
 namespace App\AppointmentReminders;
 
 use Illuminate\Log;
+use Carbon\Carbon;
 
 class AppointmentReminder
 {
@@ -29,8 +30,9 @@ class AppointmentReminder
     private function remindAbout($appointment) {
         $recipientName = $appointment->name;
         $appointmentDelta = $appointment->delta;
+        $time = Carbon::parse($appointment->when, 'UTC')->subMinutes($appointment->timezoneOffset)->format('g:i a');
 
-        $message = "Hello $recipientName, this is a reminder that you have an appointment in $appointmentDelta minutes!";
+        $message = "Hello $recipientName, this is a reminder that you have an appointment in $appointmentDelta minutes! That is $time!";
         $this->sendMessage($appointment->phoneNumber, $message);
     }
 
