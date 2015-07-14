@@ -1,0 +1,43 @@
+.step(data-title='The application', data-file='composer.json')
+  :markdown
+    ## What the application does
+
+    The application allows the user to create appointments for customers. Each appointment has a person's name, a phone number, an appointment time, and a 'delta' value which indicates how many minutes before the customer should be notified of their appointment. The appointments are then sent through SMS using Twilio's API
+
+    ## This tutorial
+
+    It's rather common to write tests for each part of our application and that's how we're going to work in this tutorial. We will write unit tests and a few integration tests. At any time you can run the application using the built-in `php artisan serve` command.
+
+.step(data-title='Dependencies', data-file='composer.json', data-highlight='6-16')
+  :markdown
+    ## Dependencies
+
+    For this tutorial we will use Laravel 5.1 as the web framework and PostgreSQL for persistence. However, since we will interact with the database solely through [Eloquent](http://laravel.com/docs/5.1/eloquent) you are free to use whichever database you are most comfortable with. Aside from Laravel and related libraries we will use two external libraries to make our lives easier:
+
+    * [Carbon](http://carbon.nesbot.com/): an object-oriented wrapper around PHP's time functions. This will make it much easier to work with the problems that come up when working with time.
+    * [Twilio-PHP](https://www.twilio.com/docs/php/install): a helper library wrapping Twilio's API.
+    * [Laravel Collective HTML](http://laravelcollective.com/docs/5.1/html): a collection of helpers to generate HTML. No longer part of Laravel's core after the 5.0 release.
+
+    As is common in Laravel projects, we will use [Composer](https://getcomposer.org/) to manage and load the application's dependencies. If you're not familiar with Composer it's worth reading about it. I promise it will be worth-it.
+
+    ### Test dependencies
+
+    We will also work with [Mockery](http://docs.mockery.io/en/latest/) and [PHPUnit](http://docs.mockery.io/en/latest/) during development so we can write a comprehensive test-suite for the application. Laravel's seed project (generated using `laravel new`) will include both in `composer.json` by default along with other testing libraries.
+
+.step(data-title='Configuration', data-file='env.example')
+  :markdown
+    ## Dealing with configuration
+
+    We need to configure the database and the tokens the application will use to access Twilio's API. By default, Laravel's seed application will attempt to read its configuration from the environment. As you might know, new versions of Laravel [use the Dotenv library to manage configuration during development](http://laravel.com/docs/5.1#environment-configuration). Any configuration should be stored in a `.env` file at the root of your application. The key pieces of information here are the database configuration and the Twilio token, SID and sending number.
+
+.step(data-title='Reading the configuration', data-file='bootstrap/app.php', data-highlight='29-30')
+  :markdown
+    ## Reading the configuration from the environment
+
+    When it comes to database configuration, Laravel automatically loads the configuration from the environment and configures Eloquent to use it. However, since we need to store and load custom configuration the process is a little more manual. First of all, we want to make sure the environment variables are set before we even attempt to start the application. For this we will use `Dotenv` once again.
+
+.step(data-title='Exposing the configuration', data-file='config/app.php', data-highlight='4-6')
+  :markdown
+    ##Exposing the configuration to the rest of the application
+
+    We want to read the configuration from the environment exactly once and then make it available through the `config` [helper function](http://laravel.com/docs/5.1#configuration-caching). In order to do this, we must first name the configuration parameters. We will simply downcase the environment variables' names. Now if we want to access the `TWILIO_AUTH_TOKEN` we can just call `config('app.twilio_auth_token')`. The same pattern follows for the other two variables.

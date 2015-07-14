@@ -16,12 +16,14 @@ class AppointmentControllerTest extends TestCase
     public function testNewAppointment()
     {
         Session::start();
-        $response = $this->call('POST', '/appointment', ['name' => 'Erich Gamma',
-                                         'phoneNumber' => '6692216251',
-                                         'when' => '2015-07-24T18:00:00.000Z',
-                                         'timezoneOffset' => '300',
-                                         '_token' => csrf_token(),
-                                         'delta' => '15']);
+        $response = $this->call(
+            'POST', '/appointment', ['name' => 'Erich Gamma',
+                                     'phoneNumber' => '6692216251',
+                                     'when' => '2015-07-24T18:00:00.000Z',
+                                     'timezoneOffset' => '300',
+                                     '_token' => csrf_token(),
+                                     'delta' => '15']
+        );
 
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertTrue($response->isRedirect());
@@ -38,12 +40,14 @@ class AppointmentControllerTest extends TestCase
     public function testNewAppointmentValidation()
     {
         Session::start();
-        $response = $this->call('POST', '/appointment', ['name' => 'Erich Gamma',
+        $response = $this->call(
+            'POST', '/appointment', ['name' => 'Erich Gamma',
                                          'phoneNumber' => '',
                                          'when' => '2015-07-24T18:00:00.000Z',
                                          'timezoneOffset' => '300',
                                          '_token' => csrf_token(),
-                                         'delta' => '15']);
+                                         'delta' => '15']
+        );
 
         $appointments = \App\Appointment::where(['name' => 'Erich Gamma'])->get();
         $this->assertCount(0, $appointments);
