@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\Inspire::class,
+        '\App\Console\Commands\SendReminders'
     ];
 
     /**
@@ -24,24 +24,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(
-            function () {
-                $accountSid = config('app.twilio_account_sid');
-                $authToken = config('app.twilio_auth_token');
-                $sendingNumber = config('app.twilio_sending_number');
-                $twilioClient = new \Services_Twilio($accountSid, $authToken);
-
-                $allAppointments = \App\Appointment::all();
-                $appointmentsFinder = new \App\AppointmentReminders\AppointmentFinder($allAppointments);
-                $matchingAppointments = $appointmentsFinder->findMatchingAppointments();
-                $appointmentReminder = new \App\AppointmentReminders\AppointmentReminder(
-                    $matchingAppointments,
-                    $sendingNumber,
-                    $twilioClient->account->messages
-                );
-
-                $appointmentReminder->sendReminders();
-            }
-        )->everyTenMinutes();
+        $schedule->command('reminders:send')->everyTenMinutes();
     }
 }
