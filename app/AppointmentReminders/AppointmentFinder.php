@@ -22,20 +22,22 @@ class AppointmentFinder
      *         must be reminded within a minute
      */
     public function findMatchingAppointments() {
-        $appointmentsToRemind = $this->appointments->filter(function($appointment) {
-            return $this->isAppointmentWithinAMinute($appointment);
-        });
+        $appointmentsToRemind = $this->appointments->filter(
+            function ($appointment) {
+                return $this->isAppointmentWithinAMinute($appointment);
+            }
+        );
 
         return $appointmentsToRemind;
     }
 
     private function isAppointmentWithinAMinute($appointment) {
         $now = Carbon::now();
-        $inTenMinute = Carbon::now()->addMinutes(10);
+        $inTenMinutes = Carbon::now()->addMinutes(10);
         $appointmentTime = Carbon::parse($appointment->when, 'UTC');
         $appointmentReminderTime = $appointmentTime->subMinutes($appointment->delta);
 
-        return $appointmentReminderTime->between($now, $inAMinute);
+        return $appointmentReminderTime->between($now, $inTenMinutes);
     }
 
 }

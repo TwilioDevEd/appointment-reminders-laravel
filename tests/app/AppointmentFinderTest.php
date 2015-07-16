@@ -31,7 +31,10 @@ class AppointmentFinderTest extends TestCase
 
         $finder = new \App\AppointmentReminders\AppointmentFinder($appointments);
 
-        $this->assertEquals(collect([$appointmentToRemindAbout]), $finder->findMatchingAppointments());
+        $this->assertEquals(
+            collect([$appointmentToRemindAbout]),
+            $finder->findMatchingAppointments()
+        );
     }
 
 }
