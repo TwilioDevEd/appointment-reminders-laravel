@@ -15,4 +15,6 @@
 
   :markdown
     ## The view
-      The view layer is standard [Laravel's Blade templates](http://laravel.com/docs/5.1/blade). In order to keep everything nice and tidy the views inherit from a master template and then render their own content into it. We include a few libraries: [Bootstrap](http://getbootstrap.com/) and [jQuery](https://jquery.com/) are the most important ones. The view displaying the index can be found as `resources/views/appointment/index.blade.php` and the partial view containing the main form used to create/edit appointments can be found in `resources/views/appointment/_form.blade.php`
+      The view layer is standard [Laravel's Blade templates](http://laravel.com/docs/5.1/blade). In order to keep everything nice and tidy the views inherit from a master template and then render their own content into it. We include a few libraries: [Bootstrap](http://getbootstrap.com/) and [jQuery](https://jquery.com/) are the most important ones. The view displaying the index can be found as `resources/views/appointment/index.blade.php` and the partial view containing the main form used to create/edit appointments can be found in `resources/views/appointment/_form.blade.php`. That's all for the web part of the application.
+
+      Next we will send the SMS reminders using a background job.

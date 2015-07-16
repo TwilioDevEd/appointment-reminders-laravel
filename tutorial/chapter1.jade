@@ -41,3 +41,5 @@
     ##Exposing the configuration to the rest of the application
 
     We want to read the configuration from the environment exactly once and then make it available through the `config` [helper function](http://laravel.com/docs/5.1#configuration-caching). In order to do this, we must first name the configuration parameters. We will simply downcase the environment variables' names. Now if we want to access the `TWILIO_AUTH_TOKEN` we can just call `config('app.twilio_auth_token')`. The same pattern follows for the other two variables.
+
+    Next we will look at the web part of the application.
