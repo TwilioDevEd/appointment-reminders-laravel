@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\Inspire::class,
+        '\App\Console\Commands\SendReminders'
     ];
 
     /**
@@ -24,17 +24,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
-
-        $schedule->call(function() {
-            $allAppointments = \App\Appointment::all();
-            $appointmentsFinder = new \App\AppointmentReminders\AppointmentFinder($allAppointments);
-            $matchingAppointments = $appointmentsFinder->findMatchingAppointments();
-            $appointmentReminder = new \App\AppointmentReminders\AppointmentReminder($matchingAppointments);
-
-            $appointmentReminder->sendReminders();
-
-        })->everyMinute();
+        $schedule->command('reminders:send')->everyTenMinutes();
     }
 }
