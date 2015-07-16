@@ -2,7 +2,7 @@
   :markdown
     ## What the application does
 
-    The application allows the user to create appointments for customers. Each appointment has a person's name, a phone number, an appointment time, and a 'delta' value which indicates how many minutes before the customer should be notified of their appointment. The appointments are then sent through SMS using Twilio's API
+    The application allows the user to create appointments for customers. Each appointment has a person's name, a phone number, an appointment time, and a 'delta' value which indicates how many minutes before the customer should be notified of their appointment. The customers are then reminded of their appointment through SMS using Twilio's API
 
     ## This tutorial
 
@@ -22,7 +22,7 @@
 
     ### Test dependencies
 
-    We will also work with [Mockery](http://docs.mockery.io/en/latest/) and [PHPUnit](http://docs.mockery.io/en/latest/) during development so we can write a comprehensive test-suite for the application. Laravel's seed project (generated using `laravel new`) will include both in `composer.json` by default along with other testing libraries.
+    We will also work with [Mockery](http://docs.mockery.io/en/latest/) and [PHPUnit](http://docs.mockery.io/en/latest/) during development so we can write a comprehensive test-suite for the application. Laravel's seed project (generated using `laravel new`) will include both libraries in `composer.json` by default, along with other testing libraries.
 
 .step(data-title='Configuration', data-file='env.example')
   :markdown
