@@ -30,7 +30,7 @@
 
     We need to configure the database and the tokens the application will use to access Twilio's API. By default, Laravel's seed application will attempt to read its configuration from the environment. As you might know, new versions of Laravel [use the Dotenv library to manage configuration during development](http://laravel.com/docs/5.1#environment-configuration). Any configuration should be stored in a `.env` file at the root of your application. The key pieces of information here are the database configuration and the Twilio token, SID and sending number.
 
-.step(data-title='Reading the configuration', data-file='bootstrap/app.php', data-highlight='29-30')
+.step(data-title='Reading the configuration', data-file='bootstrap/app.php', data-highlight='44-46')
   :markdown
     ## Reading the configuration from the environment
 

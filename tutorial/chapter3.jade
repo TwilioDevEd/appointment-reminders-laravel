@@ -1,4 +1,4 @@
-.step(data-title='Sending the reminders', data-file='app/Console/Kernel.php', data-highlight='30-38')
+.step(data-title='Sending the reminders', data-file='app/Console/Commands/SendReminders.php', data-highlight='38-55')
   :markdown
     ## Sending the reminders
     In order to message our customers we need to do three things:
@@ -9,7 +9,7 @@
 
     Now, we're going write a class for each task, except for the first one since Eloquent makes this a one-liner. The code will be executed using every minute using [Laravel's scheduler](http://laravel.com/docs/5.1/scheduling#defining-schedules)
 
-.step(data-title='Finding appointments that are due', data-file='app/AppointmentReminders/AppointmentFinder.php', data-highlight='24-39')
+.step(data-title='Finding appointments that are due', data-file='app/AppointmentReminders/AppointmentFinder.php', data-highlight='24-41')
   :markdown
     ## The `AppointmentFinder` class
     When instantiated, this class expects a [Laravel collection](http://laravel.com/docs/5.1/collections) with `Appointment` objects in it. The logic of the class is as follows:
@@ -20,7 +20,7 @@
 
     The algorithm is a predicate that then is used to filter the appointment collection. As already mentioned, it's important to keep in mind all operations concerning time are done assuming UTC time.
 
-.step(data-title='Sending the reminders', data-file='app/AppointmentReminders/AppointmentReminder.php', data-highlight='24-50')
+.step(data-title='Sending the reminders', data-file='app/AppointmentReminders/AppointmentReminder.php')
   :markdown
     ## The `AppointmentReminder` class
     The responsibility of the class is sending the remainders through SMS. Similarly to the `AppointmentFinder` class, it expects a collection of `Appointment` objects when instantiated. The logic is as follows:
@@ -34,4 +34,4 @@
 .step(data-title='Running the Laravel scheduler' data-file='app/Console/Kernel.php')
   :markdown
     ## Scheduling messages to be sent
-    Now that we have all the pieces done and working together it's time to run the Laravel scheduler. Wherever you might be deploying the application needs to run the `php artisan schedule:run` command every minute. This can be done quite easily using cron. But something simple like an infinite shell loop should work just fine (but might not be reliable).
+    Now that we have all the pieces done and working together it's time to run the Laravel scheduler. Wherever you might be deploying the application needs to run the `php artisan schedule:run` command every minute. This can be done quite easily using cron. But something simple like an infinite shell loop should work just fine (but might not be reliable). The scheduler can be ran manually using `php artisan reminders:send`
