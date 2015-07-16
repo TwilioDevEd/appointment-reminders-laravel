@@ -18,7 +18,7 @@ class SendReminders extends Command
      *
      * @var string
      */
-    protected $description = 'Command description.';
+    protected $description = 'Send reminders using Twilio';
 
     /**
      * Create a new command instance.
@@ -33,7 +33,7 @@ class SendReminders extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {
