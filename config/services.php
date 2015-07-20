@@ -14,25 +14,9 @@ return [
     |
     */
 
-    'mailgun' => [
-        'domain' => '',
-        'secret' => '',
-    ],
-
-    'mandrill' => [
-        'secret' => '',
-    ],
-
-    'ses' => [
-        'key'    => '',
-        'secret' => '',
-        'region' => 'us-east-1',
-    ],
-
-    'stripe' => [
-        'model'  => App\User::class,
-        'key'    => '',
-        'secret' => '',
-    ],
-
+    'twilio' => [
+        'twilio_account_sid' => env('TWILIO_ACCOUNT_SID'),
+        'twilio_auth_token' => env('TWILIO_AUTH_TOKEN'),
+        'twilio_sending_number' => env('TWILIO_SENDING_NUMBER')
+    ]
 ];
