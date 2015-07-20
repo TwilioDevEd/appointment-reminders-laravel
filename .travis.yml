@@ -1,0 +1,20 @@
+language: php
+php:
+  - 5.6
+
+addons:
+  postgresql: "9.4"
+
+install:
+  - pecl install pgsql
+  - composer install
+
+env:
+  - DB_CONNECTION=pgsql
+  - DB_USER=postgres
+  - DB_DATABASE=appointments
+  - APP_ENV=test
+
+before_script:
+  - psql -c 'create database appointments;' -U postgres
+  - php artisan migrate
