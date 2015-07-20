@@ -1,7 +1,7 @@
 .step(data-title='Routes', data-file='app/Http/routes.php')
   :markdown
     ## Routes
-      The web part of the application is a simple CRUD layer over the `Appointment` exposed as a set of RESTful endpoints. We'll skim over most of the implementation since most developers are likely familiar with most of the concepts. Here you can see the Laravel resource that will generate GET, POST, PUT/PATCH, and DELETE endpoints for the resource. [You can find more information on the conventions in Laravel's documentation.](http://laravel.com/docs/5.0/controllers#restful-resource-controllers)
+      The web part of the application is a simple CRUD layer over the `Appointment` exposed as a set of RESTful endpoints. We'll skim over most of the implementation since most developers are likely familiar with most of the concepts. Here you can see the Laravel resource that will generate GET, POST, PUT/PATCH, and DELETE endpoints for the resource. We have also included a root handler that will redirect the app's root URL to the appointment index route. [You can find more information on the conventions in Laravel's documentation.](http://laravel.com/docs/5.0/controllers#restful-resource-controllers)
 
 .step(data-title='Model and Controller', data-file='app/Http/Controllers/AppointmentController.php')
 

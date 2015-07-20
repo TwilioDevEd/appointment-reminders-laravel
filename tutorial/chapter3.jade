@@ -1,4 +1,4 @@
-.step(data-title='Sending the reminders', data-file='app/Console/Commands/SendReminders.php', data-highlight='38-55')
+.step(data-title='Sending the reminders', data-file='app/Console/Commands/SendReminders.php', data-highlight='38-56')
   :markdown
     ## Sending the reminders
     In order to message our customers we need to do three things:
@@ -9,7 +9,7 @@
 
     Now, we're going write a class for each task, except for the first one since Eloquent makes this a one-liner. The code will be executed using every minute using [Laravel's scheduler](http://laravel.com/docs/5.1/scheduling#defining-schedules)
 
-.step(data-title='Finding appointments that are due', data-file='app/AppointmentReminders/AppointmentFinder.php', data-highlight='24-41')
+.step(data-title='Finding appointments that are due', data-file='app/AppointmentReminders/AppointmentFinder.php', data-highlight='24-43')
   :markdown
     ## The `AppointmentFinder` class
     When instantiated, this class expects a [Laravel collection](http://laravel.com/docs/5.1/collections) with `Appointment` objects in it. The logic of the class is as follows:
