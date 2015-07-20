@@ -19,3 +19,4 @@ env:
 before_script:
   - psql -c 'create database appointments;' -U postgres
   - php artisan migrate
+  - psql -d appointments -c 'select * from appointments;' -U postgres
