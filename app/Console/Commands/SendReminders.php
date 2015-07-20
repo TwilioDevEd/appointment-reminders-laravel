@@ -37,9 +37,10 @@ class SendReminders extends Command
      */
     public function handle()
     {
-        $accountSid = config('app.twilio_account_sid');
-        $authToken = config('app.twilio_auth_token');
-        $sendingNumber = config('app.twilio_sending_number');
+        $twilioConfig = config('services.twilio');
+        $accountSid = $twilioConfig['twilio_account_sid'];
+        $authToken = $twilioConfig['twilio_auth_token'];
+        $sendingNumber = $twilioConfig['twilio_sending_number'];
         $twilioClient = new \Services_Twilio($accountSid, $authToken);
 
         $allAppointments = \App\Appointment::all();

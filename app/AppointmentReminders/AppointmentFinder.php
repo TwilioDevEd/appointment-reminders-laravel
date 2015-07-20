@@ -21,7 +21,8 @@ class AppointmentFinder
      * @return Illuminate\Database\Eloquent\Collection Collection of appointments that
      *         must be reminded within a minute
      */
-    public function findMatchingAppointments() {
+    public function findMatchingAppointments()
+    {
         $appointmentsToRemind = $this->appointments->filter(
             function ($appointment) {
                 return $this->isAppointmentWithinAMinute($appointment);
@@ -31,7 +32,8 @@ class AppointmentFinder
         return $appointmentsToRemind;
     }
 
-    private function isAppointmentWithinAMinute($appointment) {
+    private function isAppointmentWithinAMinute($appointment)
+    {
         $now = Carbon::now();
         $inTenMinutes = Carbon::now()->addMinutes(10);
         $appointmentTime = Carbon::parse($appointment->when, 'UTC');

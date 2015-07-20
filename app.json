@@ -1,0 +1,48 @@
+{
+  "name": "Appointment Reminders Laravel",
+  "description": "Notify customers of upcoming appointments",
+  "keywords": [
+    "twilio",
+    "laravel",
+    "php"
+  ],
+  "scripts": {
+    "postdeploy": "php artisan migrate"
+  },
+  "addons": ["heroku-postgresql:hobby-dev", "scheduler:standard"]
+  ,
+  "env": {
+    "TWILIO_ACCOUNT_SID": {
+      "description": "API username - find your account SID at https://www.twilio.com/user/account/voice-messaging"
+    },
+    "TWILIO_AUTH_TOKEN": {
+      "description": "API password - find your auth token at https://www.twilio.com/user/account/voice-messaging"
+    },
+    "TWILIO_SENDING_NUMBER": {
+      "description": "A number in your Twilio account to use with this application in E.164 format (e.g. +16518675309) - view your numbers at https://www.twilio.com/user/account/phone-numbers/incoming"
+    },
+    "DB_CONNECTION": {
+        "description": "Database connection to use (e.g pgsql)"
+    },
+    "DB_DATABASE": {
+        "description": "The name of the database to connect to"
+    },
+    "DB_HOST": {
+        "description": "The database host"
+    },
+    "DB_USERNAME": {
+        "description": "The database username"
+    },
+    "DB_PASSWORD": {
+        "description": "The database password"
+    },
+    "APP_KEY": {
+        "description": "App key for Laravel",
+        "generator": "secret"
+    }
+  },
+  "website": "https://github.com/TwilioDevEd/appointment-reminders-laravel",
+  "repository": "https://github.com/TwilioDevEd/appointment-reminders-laravel",
+  "logo": "https://s3.amazonaws.com/howtodocs/twilio-logo.png",
+  "success_url": "/welcome.html"
+}

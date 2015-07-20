@@ -2,6 +2,10 @@
 
 This application demostrates how to use the Twilio API to send automated reminders about upcoming appointments
 
+## Deploying to Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/appointment-reminders-laravel)
+
 ## Running locally
 
 ### The web application

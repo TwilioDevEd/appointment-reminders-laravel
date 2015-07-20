@@ -12,15 +12,17 @@ class CreateAppointmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('appointments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('phoneNumber');
-            $table->dateTime('when');
-            $table->integer('timezoneOffset');
-            $table->integer('delta');
-            $table->timestamps();
-        });
+        Schema::create(
+            'appointments', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->string('phoneNumber');
+                $table->dateTime('when');
+                $table->integer('timezoneOffset');
+                $table->integer('delta');
+                $table->timestamps();
+            }
+        );
     }
 
     /**
