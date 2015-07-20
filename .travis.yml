@@ -9,7 +9,7 @@ install:
 env:
   global:
     - DB_CONNECTION=pgsql
-    - DB_USER=postgres
+    - DB_USERNAME=postgres
     - DB_HOST=localhost
     - DB_DATABASE=appointments
     - APP_ENV=test
