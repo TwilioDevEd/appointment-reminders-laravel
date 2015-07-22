@@ -3,27 +3,26 @@
     ## Sending the reminders
     In order to message our customers we need to do three things:
 
-      1. Find all possible appointments.
-      2. Determine which appointments are "due".
-      3. Send the appointment reminders.
+      1. Determine which appointments are "due".
+      2. Send the appointment reminders.
 
-    Now, we're going write a class for each task, except for the first one since Eloquent makes this a one-liner. The code will be executed using every minute using [Laravel's scheduler](http://laravel.com/docs/5.1/scheduling#defining-schedules)
+    Now, we're going to write a scope to achieve the first point and a class to achieve the second. The code will be executed using every minute using [Laravel's scheduler](http://laravel.com/docs/5.1/scheduling#defining-schedules)
 
-.step(data-title='Finding appointments that are due', data-file='app/AppointmentReminders/AppointmentFinder.php', data-highlight='24-43')
+.step(data-title='Finding appointments that are due', data-file='app/models/Appointment.php', data-highlight='12-14')
   :markdown
-    ## The `AppointmentFinder` class
-    When instantiated, this class expects a [Laravel collection](http://laravel.com/docs/5.1/collections) with `Appointment` objects in it. The logic of the class is as follows:
+    ## The `appointmentsDue` scope
 
-    1. Find the current time and add one minute to it. This will be the interval of "current" appointments
-    2. Substract the "delta" minutes from the time the appointment is scheduled. Remember the application is supposed to remind customers of *future* appointments
-    3. Check if this computed time falls within the interval computed in 1.
+    We will use this scope to find appointments that must be sent.
 
-    The algorithm is a predicate that then is used to filter the appointment collection. As already mentioned, it's important to keep in mind all operations concerning time are done assuming UTC time.
+    1. Find the current time and add ten minutes to it. This will be the interval of "current" appointments.
+    2. Check if the `notificationTime` time falls within the interval.
+
+    As already mentioned, it's important to keep in mind all operations concerning time are done assuming UTC time.
 
 .step(data-title='Sending the reminders', data-file='app/AppointmentReminders/AppointmentReminder.php')
   :markdown
     ## The `AppointmentReminder` class
-    The responsibility of the class is sending the remainders through SMS. Similarly to the `AppointmentFinder` class, it expects a collection of `Appointment` objects when instantiated. The logic is as follows:
+    The responsibility of the class is sending the remainders through SMS. The logic is as follows:
 
     1. Iterate over every element in the collection.
     2. Format a message to be sent to the customer as a reminder.
