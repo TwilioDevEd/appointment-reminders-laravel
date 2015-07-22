@@ -33,7 +33,7 @@ class AppointmentControllerTest extends TestCase
         $this->assertCount(1, $appointments);
         $this->assertEquals('Erich Gamma', $appointments->first()['name']);
         $this->assertEquals('6692216251', $appointments->first()['phoneNumber']);
-        $this->assertEquals('15', $appointments->first()['delta']);
+        $this->assertEquals('2015-07-24 17:45:00', $appointments->first()['notificationTime']);
         $this->assertEquals('2015-07-24 18:00:00', $appointments->first()['when']);
     }
 
@@ -67,7 +67,7 @@ class AppointmentControllerTest extends TestCase
         $newAppointment->name = 'Martin Fowler';
         $newAppointment->phoneNumber = '6692216251';
         $newAppointment->when = '2015-07-24T18:00:00.000Z';
-        $newAppointment->delta = '15';
+        $newAppointment->notificationTime = '2015-07-24T17:45:00.000Z';
         $newAppointment->timezoneOffset = '300';
         $newAppointment->save();
 
