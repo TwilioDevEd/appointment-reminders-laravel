@@ -19,7 +19,7 @@ class CreateAppointmentsTable extends Migration
                 $table->string('phoneNumber');
                 $table->dateTime('when');
                 $table->integer('timezoneOffset');
-                $table->integer('delta');
+                $table->dateTime('notificationTime');
                 $table->timestamps();
             }
         );

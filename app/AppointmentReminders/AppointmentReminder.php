@@ -10,13 +10,18 @@ class AppointmentReminder
     /**
      * Construct a new AppointmentReminder
      *
-     * @param Illuminate\Support\Collection $appointments Collection of appointments
+     * @param Illuminate\Support\Collection $twilioClient The client to use to query the API
      */
-    function __construct($appointments, $sendingNumber, $twilioClient)
+    function __construct()
     {
-        $this->appointments = $appointments;
-        $this->sendingNumber = $sendingNumber;
-        $this->twilioClient = $twilioClient;
+        $this->appointments = \App\Appointment::appointmentsDue()->get();
+
+        $twilioConfig = config('services.twilio');
+        $accountSid = $twilioConfig['twilio_account_sid'];
+        $authToken = $twilioConfig['twilio_auth_token'];
+        $this->sendingNumber = $twilioConfig['twilio_sending_number'];
+
+        $this->twilioClient = new \Services_Twilio($accountSid, $authToken);
     }
 
     /**
@@ -43,10 +48,11 @@ class AppointmentReminder
     private function _remindAbout($appointment)
     {
         $recipientName = $appointment->name;
-        $appointmentDelta = $appointment->delta;
-        $time = Carbon::parse($appointment->when, 'UTC')->subMinutes($appointment->timezoneOffset)->format('g:i a');
+        $time = Carbon::parse($appointment->when, 'UTC')
+              ->subMinutes($appointment->timezoneOffset)
+              ->format('g:i a');
 
-        $message = "Hello $recipientName, this is a reminder that you have an appointment in $appointmentDelta minutes! That is $time!";
+        $message = "Hello $recipientName, this is a reminder that you have an appointment at $time!";
         $this->_sendMessage($appointment->phoneNumber, $message);
     }
 
@@ -60,7 +66,7 @@ class AppointmentReminder
      */
     private function _sendMessage($number, $content)
     {
-        $this->twilioClient->create(
+        $this->twilioClient->account->messages->create(
             array(
             "From" => $this->sendingNumber,
             "To" => $number,

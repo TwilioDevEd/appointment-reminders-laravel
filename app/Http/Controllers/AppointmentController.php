@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -76,7 +77,7 @@ class AppointmentController extends Controller
         $existingAppointment->phoneNumber = $updatedAppointment->phoneNumber;
         $existingAppointment->timezoneOffset = $updatedAppointment->timezoneOffset;
         $existingAppointment->when = $updatedAppointment->when;
-        $existingAppointment->delta = $updatedAppointment->delta;
+        $existingAppointment->notificationTime = $updatedAppointment->notificationTime;
 
         $existingAppointment->save();
         return redirect()->route('appointment.index');
@@ -90,7 +91,9 @@ class AppointmentController extends Controller
         $newAppointment->phoneNumber = $request->input('phoneNumber');
         $newAppointment->timezoneOffset = $request->input('timezoneOffset');
         $newAppointment->when = $request->input('when');
-        $newAppointment->delta = $request->input('delta');
+
+        $notificationTime = Carbon::parse($request->input('when'))->subMinutes($request->delta);
+        $newAppointment->notificationTime = $notificationTime;
 
         return $newAppointment;
     }
