@@ -10,11 +10,11 @@ class AppointmentReminder
     /**
      * Construct a new AppointmentReminder
      *
-     * @param Illuminate\Support\Collection $appointments Collection of appointments
+     * @param Illuminate\Support\Collection $twilioClient The client to use to query the API
      */
-    function __construct($appointments, $sendingNumber, $twilioClient)
+    function __construct($sendingNumber, $twilioClient)
     {
-        $this->appointments = $appointments;
+        $this->appointments = \App\Appointment::appointmentsDue()->get();
         $this->sendingNumber = $sendingNumber;
         $this->twilioClient = $twilioClient;
     }
@@ -43,10 +43,11 @@ class AppointmentReminder
     private function _remindAbout($appointment)
     {
         $recipientName = $appointment->name;
-        $appointmentDelta = $appointment->delta;
-        $time = Carbon::parse($appointment->when, 'UTC')->subMinutes($appointment->timezoneOffset)->format('g:i a');
+        $time = Carbon::parse($appointment->when, 'UTC')
+              ->subMinutes($appointment->timezoneOffset)
+              ->format('g:i a');
 
-        $message = "Hello $recipientName, this is a reminder that you have an appointment in $appointmentDelta minutes! That is $time!";
+        $message = "Hello $recipientName, this is a reminder that you have an appointment at $time!";
         $this->_sendMessage($appointment->phoneNumber, $message);
     }
 

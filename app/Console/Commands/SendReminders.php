@@ -43,11 +43,7 @@ class SendReminders extends Command
         $sendingNumber = $twilioConfig['twilio_sending_number'];
         $twilioClient = new \Services_Twilio($accountSid, $authToken);
 
-        $allAppointments = \App\Appointment::all();
-        $appointmentsFinder = new \App\AppointmentReminders\AppointmentFinder($allAppointments);
-        $matchingAppointments = $appointmentsFinder->findMatchingAppointments();
         $appointmentReminder = new \App\AppointmentReminders\AppointmentReminder(
-            $matchingAppointments,
             $sendingNumber,
             $twilioClient->account->messages
         );
