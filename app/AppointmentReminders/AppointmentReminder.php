@@ -12,11 +12,16 @@ class AppointmentReminder
      *
      * @param Illuminate\Support\Collection $twilioClient The client to use to query the API
      */
-    function __construct($sendingNumber, $twilioClient)
+    function __construct()
     {
         $this->appointments = \App\Appointment::appointmentsDue()->get();
-        $this->sendingNumber = $sendingNumber;
-        $this->twilioClient = $twilioClient;
+
+        $twilioConfig = config('services.twilio');
+        $accountSid = $twilioConfig['twilio_account_sid'];
+        $authToken = $twilioConfig['twilio_auth_token'];
+        $this->sendingNumber = $twilioConfig['twilio_sending_number'];
+
+        $this->twilioClient = new \Services_Twilio($accountSid, $authToken);
     }
 
     /**
@@ -61,7 +66,7 @@ class AppointmentReminder
      */
     private function _sendMessage($number, $content)
     {
-        $this->twilioClient->create(
+        $this->twilioClient->account->messages->create(
             array(
             "From" => $this->sendingNumber,
             "To" => $number,
