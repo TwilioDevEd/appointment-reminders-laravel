@@ -11,6 +11,7 @@ class Appointment extends Model
     {
         $now = Carbon::now();
         $inTenMinutes = Carbon::now()->addMinutes(10);
-        return $query->where('notificationTime', '>=', $now)->where('notificationTime', '<=', $inTenMinutes);
+        return $query->where('notificationTime', '>=', $now)
+            ->where('notificationTime', '<=', $inTenMinutes);
     }
 }

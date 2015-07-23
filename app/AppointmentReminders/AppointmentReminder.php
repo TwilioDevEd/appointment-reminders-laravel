@@ -68,9 +68,9 @@ class AppointmentReminder
     {
         $this->twilioClient->account->messages->create(
             array(
-            "From" => $this->sendingNumber,
-            "To" => $number,
-            "Body" => $content
+                "From" => $this->sendingNumber,
+                "To" => $number,
+                "Body" => $content,
             )
         );
     }

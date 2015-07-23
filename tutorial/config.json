@@ -1,6 +1,6 @@
 {
-    "title": "Learn You Laravel Reminders For Fun and Profit",
+    "title": "Appointment Reminders",
     "repo": "TwilioDevEd/appointment-reminders-laravel",
-    "description": "Learn to implement appointment reminders functionality with PHP and Laravel 5.1",
+    "description": "Learn to implement appointment reminders in your web app with Twilio. Appointment reminders allow you to automate the process of reaching out to your customers in advance of an upcoming appointment.",
     "heroku": true
 }
