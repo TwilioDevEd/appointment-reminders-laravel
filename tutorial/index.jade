@@ -1,169 +1,167 @@
-.step(data-file='app/models/Appointment.php')
-  :markdown
-    ## What does this thing do?
+.chapter(data-title='Appointment Reminders with Twilio and Laravel')
+  .step(data-file='app/models/Appointment.php')
+    :markdown
+      ## What does this thing do?
 
-    This [Laravel 5](http://laravel.com/) web application shows how to create
-    appointments for customers at a date in future, and send out reminders for
-    those appointments in a background job that runs every few minutes. 
+      This [Laravel 5](http://laravel.com/) web application shows how to create
+      appointments for customers at a date in future, and send out reminders for
+      those appointments in a background job that runs every few minutes. 
 
-    In this tutorial, we'll point out the key bits of code that make this application
-    work. If you'd like to run the code yourself, check out the instructions in
-    the README file for [this application on GitHub](https://github.com/TwilioDevEd/appointment-reminders-laravel).
+      In this tutorial, we'll point out the key bits of code that make this application
+      work. [Check out the project README on GitHub](https://github.com/TwilioDevEd/appointment-reminders-laravel)
+      to see how to run the code yourself. 
 
-    Let's get started! Click the right arrow above to advance to the next code snippet.
+      Let's get started! Click the right arrow above to advance to the next code snippet.
 
-    ---
+      ---
 
-    **See Also:**
-    [Twilio PHP Quick Start](https://www.twilio.com/docs/quickstart/php/sms/sending-via-rest),
-    [Twilio PHP Helper Library](https://twilio-php.readthedocs.org/en/latest/),
-    [Twilio REST API docs](https://www.twilio.com/docs/api), 
-    [Laravel 5 Docs](http://laravel.com/docs/5.1),
-    [Eloquent ORM](http://laravel.com/docs/5.1/eloquent),
-    [Task Scheduling in Laravel](http://laravel.com/docs/5.1/scheduling)
+      **See Also:** 
+      * [Twilio PHP Quick Start](https://www.twilio.com/docs/quickstart/php/sms/sending-via-rest)
+      * [Twilio PHP Helper Library](https://twilio-php.readthedocs.org/en/latest/)
+      * [Twilio REST API docs](https://www.twilio.com/docs/api)
+      * [Laravel 5 Docs](http://laravel.com/docs/5.1)
+      * [Eloquent ORM](http://laravel.com/docs/5.1/eloquent)
+      * [Task Scheduling in Laravel](http://laravel.com/docs/5.1/scheduling)
 
-.step(data-file='.env.example', data-highlight='21-23')
-  :markdown
-    ## Configure the application to use Twilio
+  .step(data-file='.env.example', data-highlight='21-23')
+    :markdown
+      ## Configure the application to use Twilio
 
-    Before we can use the Twilio API to send reminder text messages, we need to 
-    configure our account credentials. [These can be found on your Twilio dashboard](https://www.twilio.com/user/account/voice).
-    You'll also need an SMS-enabled phone number - you can 
-    [find or purchase a new one to use here](https://www.twilio.com/user/account/phone-numbers/incoming).
+      Before we can use the Twilio API to send reminder text messages, we need to 
+      configure our account credentials. These can be found on your [Twilio dashboard](https://www.twilio.com/user/account/voice).
+      You'll also need an SMS-enabled phone number - you can find or purchase a new one to use [here](https://www.twilio.com/user/account/phone-numbers/incoming).
 
-    We configure these values using [Dotenv](https://github.com/vlucas/phpdotenv),
-    the configuration library of choice for Laravel applications. More information
-    on how to configure this application can be found in the [project README](https://github.com/TwilioDevEd/appointment-reminders-laravel).
+      We configure these values using [Dotenv](https://github.com/vlucas/phpdotenv),
+      the configuration library of choice for Laravel applications. More information
+      on how to configure this application can be found in the [project README](https://github.com/TwilioDevEd/appointment-reminders-laravel).
 
-    ---
+      ---
 
-    **See Also:**
-    [Configuring Laravel Applications](http://laravel.com/docs/5.1/installation#configuration),
-    [Dotenv library on GitHub](https://github.com/vlucas/phpdotenv),
-    [Twilio Account Portal (Account SID and Auth Token)](https://www.twilio.com/user/account),
-    [Your Available Phone Numbers](https://www.twilio.com/user/account/phone-numbers/incoming)
+      **See Also:** 
+      * [Configuring Laravel Applications](http://laravel.com/docs/5.1/installation#configuration)
+      * [Dotenv library on GitHub](https://github.com/vlucas/phpdotenv)
+      * [Your Account SID and Auth Token](https://www.twilio.com/user/account)
+      * [Your Available Phone Numbers](https://www.twilio.com/user/account/phone-numbers/incoming)
 
-.step(data-file='app/Http/Controllers/AppointmentController.php',
-  data-highlight='86-99')
-  :markdown
-    ## Create a new appointment
+  .step(data-file='app/Http/Controllers/AppointmentController.php',
+    data-highlight='86-99')
+    :markdown
+      ## Create a new appointment
 
-    In order to send an appointment reminder, we first need to create an
-    appointment! In the [controller](http://laravel.com/docs/5.1/controllers), 
-    we take information [submitted in a form](http://laravel.com/docs/5.1/blade) 
-    (notably a customer's name and phone number, plus a time for the appointment 
-    in the future) and save it in an `Appointment` model.
+      In order to send an appointment reminder, we first need to create an
+      appointment! In the [controller](http://laravel.com/docs/5.1/controllers), 
+      we take information [submitted in a form](http://laravel.com/docs/5.1/blade) 
+      (notably a customer's name and phone number, plus a time for the appointment 
+      in the future) and save it in an `Appointment` model.
 
-    ---
+      ---
 
-    **See Also:**
-    [Laravel Controllers](http://laravel.com/docs/5.1/controllers),
-    [Models in Eloquent ORM](http://laravel.com/docs/5.1/eloquent),
-    [Blade Templates for HTML](http://laravel.com/docs/5.1/blade),
-    [Carbon date library](http://carbon.nesbot.com/)
+      **See Also:** 
+      * [Laravel Controllers](http://laravel.com/docs/5.1/controllers)
+      * [Models in Eloquent ORM](http://laravel.com/docs/5.1/eloquent)
+      * [Blade Templates for HTML](http://laravel.com/docs/5.1/blade)
+      * [Carbon date library](http://carbon.nesbot.com/)
 
-.step(data-file='app/Console/Kernel.php', data-highlight='19-28')
-  :markdown
-    ## Schedule a job to send reminders
+  .step(data-file='app/Console/Kernel.php', data-highlight='19-28')
+    :markdown
+      ## Schedule a job to send reminders
 
-    Every ten minutes, we'd like our application to check the appointments database
-    to see if any appointments are coming up that require reminders to be sent out.
-    We configure both the job code we'd like to run and the interval on which to
-    run it here.
+      Every ten minutes, we'd like our application to check the appointments database
+      to see if any appointments are coming up that require reminders to be sent out.
+      We configure both the job code we'd like to run and the interval on which to
+      run it here.
 
-    ---
+      ---
 
-    **See Also:**
-    [Task Scheduling in Laravel](http://laravel.com/docs/5.1/scheduling)
+      **See Also:** 
+      * [Task Scheduling in Laravel](http://laravel.com/docs/5.1/scheduling)
 
-.step(data-file='app/Console/Commands/SendReminders.php')
-  :markdown
-    ## Create a console command to run the job
+  .step(data-file='app/Console/Commands/SendReminders.php')
+    :markdown
+      ## Create a console command to run the job
 
-    To actually execute our recurring job logic, we create an Artisan console
-    command which queries the database for upcoming appointments and sends
-    reminders as necessary. As an added bonus, defining our job logic in this
-    way allows us to run the reminder job whenever we want from the command line.
+      To actually execute our recurring job logic, we create an Artisan console
+      command which queries the database for upcoming appointments and sends
+      reminders as necessary. As an added bonus, defining our job logic in this
+      way allows us to run the reminder job whenever we want from the command line.
 
-    ---
+      ---
 
-    **See Also:**
-    [Artisan console commands](http://laravel.com/docs/5.1/artisan),
-    [Task Scheduling in Laravel](http://laravel.com/docs/5.1/scheduling)
+      **See Also:** 
+      * [Artisan console commands](http://laravel.com/docs/5.1/artisan)
+      * [Task Scheduling in Laravel](http://laravel.com/docs/5.1/scheduling)
 
-.step(data-file='app/AppointmentReminders/AppointmentReminder.php',
-  data-highlight='10-25')
-  :markdown
-    ## Find appointments that need reminders
+  .step(data-file='app/AppointmentReminders/AppointmentReminder.php',
+    data-highlight='10-25')
+    :markdown
+      ## Find appointments that need reminders
 
-    Our recurring job uses an instance of the `AppointmentReminder` class to
-    query the database for appointments coming up in the next ten minutes and
-    send out reminder messages.
+      Our recurring job uses an instance of the `AppointmentReminder` class to
+      query the database for appointments coming up in the next ten minutes and
+      send out reminder messages.
 
-    In the constructor, we execute the database query [using a custom scope](http://laravel.com/docs/5.1/eloquent#query-scopes)
-    on the `Appointment` model. This should give us a list of all appointments with
-    a date and time that falls within the next ten minutes.
+      In the constructor, we execute the database query [using a custom scope](http://laravel.com/docs/5.1/eloquent#query-scopes)
+      on the `Appointment` model. This should give us a list of all appointments with
+      a date and time that falls within the next ten minutes.
 
-    ---
+      ---
 
-    **See Also:**
-    [Eloquent ORM query scopes](http://laravel.com/docs/5.1/eloquent#query-scopes)
+      **See Also:** 
+      * [Eloquent ORM query scopes](http://laravel.com/docs/5.1/eloquent#query-scopes)
 
-.step(data-file='app/AppointmentReminders/AppointmentReminder.php',
-  data-highlight='19-24')
-  :markdown
-    ## Set up a Twilio API client
+  .step(data-file='app/AppointmentReminders/AppointmentReminder.php',
+    data-highlight='19-24')
+    :markdown
+      ## Set up a Twilio API client
 
-    Also in the `AppointmentReminder` constructor, we create a
-    [Twilio REST Client](https://twilio-php.readthedocs.org/en/latest/usage/rest.html) 
-    to send out reminders via SMS. We initialize it with the Twilio account credentials
-    we configured earlier.
+      Also in the `AppointmentReminder` constructor, we create a
+      [Twilio REST Client](https://twilio-php.readthedocs.org/en/latest/usage/rest.html) 
+      to send out reminders via SMS. We initialize it with the Twilio account credentials
+      we configured earlier.
 
-    ---
+      ---
 
-    **See Also:**
-    [Accessing configuration values in Laravel](http://laravel.com/docs/5.1/installation#configuration),
-    [Get Started with the REST API in PHP](https://twilio-php.readthedocs.org/en/latest/index.html#quickstart)
+      **See Also:** 
+      * [Accessing configuration values in Laravel](http://laravel.com/docs/5.1/installation#configuration)
+      * [Get Started with the REST API in PHP](https://twilio-php.readthedocs.org/en/latest/index.html#quickstart)
 
-.step(data-file='app/AppointmentReminders/AppointmentReminder.php',
-  data-highlight='41-76')
-  :markdown
-    ## Send reminder messages with the Twilio API
+  .step(data-file='app/AppointmentReminders/AppointmentReminder.php',
+    data-highlight='41-76')
+    :markdown
+      ## Send reminder messages with the Twilio API
 
-    These two private functions are called for every appointment coming up that
-    requires a reminder to be sent.  The first formats the text of the message to
-    be sent out. The second actually uses the Twilio REST API client to send out a
-    text message.
+      These two private functions are called for every appointment coming up that
+      requires a reminder to be sent.  The first formats the text of the message to
+      be sent out. The second actually uses the Twilio REST API client to send out a
+      text message.
 
-    We provide a `To` parameter which is the customer's phone number, a `From`
-    parameter which is a [number in our account](https://www.twilio.com/user/account/phone-numbers/incoming),
-    and a `Body` parameter which contains the text of the message.
+      We provide a `To` parameter which is the customer's phone number, a `From`
+      parameter which is a [number in our account](https://www.twilio.com/user/account/phone-numbers/incoming),
+      and a `Body` parameter which contains the text of the message.
 
-    That's it! Our Laravel application is all set to send out reminders for
-    upcoming appointments.
+      ---
 
-    ---
+      **See Also:** 
+      * [Date Formatting with Carbon](http://carbon.nesbot.com/docs/#api-formatting)
+      * [Sending Text Messages in PHP](https://twilio-php.readthedocs.org/en/latest/index.html#quickstart)
 
-    **See Also:**
-    [Date Formatting with Carbon](http://carbon.nesbot.com/docs/#api-formatting),
-    [Sending Text Messages in PHP](https://twilio-php.readthedocs.org/en/latest/index.html#quickstart)
+  .step
+    :markdown
+      ## Where to next?
 
-.step
-  :markdown
-    ## Where to next?
+      That's it! Our Laravel application is all set to send out reminders for
+      upcoming appointments. We hope you found this sample application useful. 
+      If you're a PHP developer working with Twilio, you might enjoy these other tutorials:
 
-    We hope you found this sample application useful! If you're a PHP developer
-    working with Twilio, you might enjoy these other tutorials:
+      ### [Click to Call](https://www.twilio.com/docs/howto/walkthrough/click-to-call/php/laravel)  
+      Put a button on your web page that connects visitors to live support or sales
+      people via telephone.
 
-    ### [Click to Call](https://www.twilio.com/docs/howto/walkthrough/click-to-call/php/laravel)  
-    Put a button on your web page that connects visitors to live support or sales
-    people via telephone.
+      ### [Two-Factor Authentication](https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/php/laravel) 
+      Improve the security of Laravel's built-in login functionality by adding
+      two-factor authentication via text message.
 
-    ### [Two-Factor Authentication](https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/php/laravel) 
-    Improve the security of Laravel's built-in login functionality by adding
-    two-factor authentication via text message.
-
-    ### Did this help?
-    As always, we'd love to hear what you thought of this tutorial!
-    [Shoot us a note](mailto:devedoss@twilio.com) to let us know what you liked
-    and what we can do better. See you next time!
+      ### Did this help?
+      As always, we'd love to hear what you thought of this tutorial!
+      [Shoot us a note](mailto:devedoss@twilio.com) to let us know what you liked
+      and what we can do better. See you next time!

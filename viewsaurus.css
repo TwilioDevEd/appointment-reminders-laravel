@@ -461,7 +461,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  width: 25%;
+  width: 30%;
   color: #231f20;
   box-sizing: border-box;
   border-right: 1px solid #808184;
@@ -549,29 +549,30 @@
 #viewsaurus .saurus-prose .saurus-overview ::-webkit-scrollbar-thumb {
   background-color: #808184;
 }
-#viewsaurus .saurus-prose .saurus-overview .current a,
-#viewsaurus .saurus-prose .saurus-overview .current a:visited {
-  color: #daddd6;
+#viewsaurus .saurus-prose .saurus-overview .current {
+  background-color: #3e3739;
+  border-radius: 3px;
+}
+#viewsaurus .saurus-prose .saurus-overview ul {
+  margin: 10px 0 0 10px;
+  padding: 0;
+}
+#viewsaurus .saurus-prose .saurus-overview ul li {
+  padding: 5px;
+  margin: 0 10px 10px 0;
+  font-size: 16px;
+  list-style: none;
   font-weight: bold;
 }
-#viewsaurus .saurus-prose .saurus-overview ol {
-  margin: 20px 0 0 10px;
-  padding: 0 0 0 20px;
-}
-#viewsaurus .saurus-prose .saurus-overview ol li {
-  padding: 8px;
-  margin: 5px 10px 5px 5px;
-  font-size: 14px;
-  color: #808184;
-}
-#viewsaurus .saurus-prose .saurus-overview ol li a,
-#viewsaurus .saurus-prose .saurus-overview ol li a:visited {
+#viewsaurus .saurus-prose .saurus-overview ul li a,
+#viewsaurus .saurus-prose .saurus-overview ul li a:visited {
   display: block;
   width: 100%;
   color: #71bbba;
   text-decoration: none;
+  font-weight: normal;
 }
-#viewsaurus .saurus-prose .saurus-overview ol li a:hover {
+#viewsaurus .saurus-prose .saurus-overview ul li a:hover {
   text-decoration: underline;
 }
 #viewsaurus .saurus-prose .saurus-prose-header {
@@ -595,8 +596,6 @@
   line-height: 1.2em;
   font-weight: bold;
   text-transform: uppercase;
-  color: #231f20;
-  text-decoration: none;
 }
 #viewsaurus .saurus-prose .saurus-nav-buttons {
   color: #808184;
@@ -768,7 +767,7 @@
 #viewsaurus .saurus-code {
   position: absolute;
   top: 0;
-  left: 25%;
+  left: 30%;
   bottom: 0;
   right: 0;
   box-sizing: border-box;
@@ -887,7 +886,6 @@
   display: block;
   color: white;
   font-style: italic;
-  outline: 0;
 }
 #viewsaurus .saurus-explorer a.explorer-get-code i {
   margin-right: 5px;

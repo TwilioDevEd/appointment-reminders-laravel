@@ -426,8 +426,11 @@ var ExplorerView = Backbone.View.extend({
 
 module.exports = ExplorerView;
 },{}],6:[function(require,module,exports){
+// Get Title for a step either from a data attribute or the first title tag
 function titleForStep($e) {
-    return $e.find('h1, h2, h3, h4, h5').first().text();
+    var title = $e.attr('data-title');
+    if (!title) title = $e.find('h1, h2, h3, h4, h5').first().text();
+    return title;
 }
 
 // Represent UI state for prose view
@@ -474,7 +477,7 @@ var ProseView = Backbone.View.extend({
         self.$overviewContent = self.$el.find('.saurus-overview');
         self.$total = self.$el.find('.total');
         self.$title = self.$el.find('.step-title');
-        self.$overviewList = self.$el.find('.saurus-overview ol');
+        self.$overviewList = self.$el.find('.saurus-overview ul');
         self.$progressBar = self.$el.find('.saurus-progress-bar');
         self.$nextTitle = self.$el.find('.next-title-inner');
         self.$start = self.$el.find('.saurus-start');
@@ -570,7 +573,7 @@ var ProseView = Backbone.View.extend({
         self.$content.scrollTop(0);
 
         // Update section title
-        // self.$title.html(titleForStep($step));
+        // self.$title.html($step.attr('data-title'));
 
         // Update current link in overview
         self.$overviewList.find('li').removeClass('current');
@@ -611,13 +614,13 @@ var ProseView = Backbone.View.extend({
                 left:0
             });
             self.$overviewNav.addClass('fa-close')
-                .removeClass('fa-bookmark');
+                .removeClass('fa-list');
         } else {
             self.$overviewContent.animate({
                 left:'-100%'
             });
             self.$overviewNav.removeClass('fa-close')
-                .addClass('fa-bookmark');
+                .addClass('fa-list');
         }
     },
 
@@ -625,17 +628,30 @@ var ProseView = Backbone.View.extend({
     populateOverview: function() {
         var self = this;
         var html = '';
+        var firstChapter = true;
         var stepIndex = 0;
 
-        // Iterate over steps, extract data, build overview HTML
-        self.$content.find('.step').each(function() {
-            var $step = $(this);
-            var stepTitle = titleForStep($step);
-            html += '<li data-step="' + stepIndex + '">';
-            html += '<a href="#' + stepIndex + '">';
-            html += stepTitle + '</a></li>';
-            stepIndex++;
+        // Iterate over chapters, extract data, build overview HTML
+        self.$content.find('.chapter, .step').each(function() {
+            var $thing = $(this);
+            if ($thing.hasClass('chapter')) {
+                if (!firstChapter) {
+                    // end previous chapter
+                    html += '</ul></li>';
+                }
+                firstChapter = false;
+                html += '<li class="chapter"><span>';
+                html += $thing.attr('data-title') + '</span><ul>';
+            } else {
+                html += '<li data-step="' + stepIndex + '">';
+                html += '<a href="#' + stepIndex + '">';
+                html += titleForStep($thing) + '</a></li>';
+                stepIndex++;
+            }
         });
+
+        // close off final chapter li
+        html += '</ul></li>';
 
         // Append generated overview HTML
         self.$overviewList.html(html);
