@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/appointment-reminders-laravel.svg?branch=master)](https://travis-ci.org/TwilioDevEd/appointment-reminders-laravel)
 
-This application demostrates how to use the Twilio API to send automated reminders about upcoming appointments
+This application demostrates how to use the Twilio API to send automated reminders about upcoming appointments.
+
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/appointment-reminders/php/laravel)!
 
 ## Deploying to Heroku
 
