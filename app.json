@@ -21,21 +21,6 @@
     "TWILIO_SENDING_NUMBER": {
       "description": "A number in your Twilio account to use with this application in E.164 format (e.g. +16518675309) - view your numbers at https://www.twilio.com/user/account/phone-numbers/incoming"
     },
-    "DB_CONNECTION": {
-        "description": "Database connection to use (e.g pgsql)"
-    },
-    "DB_DATABASE": {
-        "description": "The name of the database to connect to"
-    },
-    "DB_HOST": {
-        "description": "The database host"
-    },
-    "DB_USERNAME": {
-        "description": "The database username"
-    },
-    "DB_PASSWORD": {
-        "description": "The database password"
-    },
     "APP_KEY": {
         "description": "App key for Laravel",
         "generator": "secret"
