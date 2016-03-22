@@ -17,6 +17,6 @@ return [
     'twilio' => [
         'twilio_account_sid' => env('TWILIO_ACCOUNT_SID'),
         'twilio_auth_token' => env('TWILIO_AUTH_TOKEN'),
-        'twilio_sending_number' => env('TWILIO_SENDING_NUMBER')
+        'twilio_number' => env('TWILIO_NUMBER')
     ]
 ];
