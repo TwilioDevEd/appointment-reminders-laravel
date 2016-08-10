@@ -22,21 +22,21 @@ This application demostrates how to use the Twilio API to send automated reminde
 
 1. Create a database.
 
-  ```bash
-  $ createdb appointments
-  ```
+   ```bash
+   $ createdb appointments
+   ```
 1. Copy the sample configuration file and edit it to match your configuration.
 
    ```bash
    $ cp .env.example .env
    ```
 
-  You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` under
-  your
-  [Twilio Account Settings](https://www.twilio.com/user/account/settings).
+   You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` under
+   your
+   [Twilio Account Settings](https://www.twilio.com/user/account/settings).
 
-  You can buy Twilio phone numbers at [Twilio numbers](https://www.twilio.com/user/account/phone-numbers/search)
-  `TWILIO_NUMBER` should be set to the phone number you purchased above.
+   You can buy Twilio phone numbers at [Twilio numbers](https://www.twilio.com/user/account/phone-numbers/search)
+   `TWILIO_NUMBER` should be set to the phone number you purchased above.
 
 1. Generating an `APP_KEY`:
 
@@ -51,9 +51,9 @@ This application demostrates how to use the Twilio API to send automated reminde
 
 1. Running the application using Artisan.
 
-  ```bash
-  $ php artisan serve
-  ```
+   ```bash
+   $ php artisan serve
+   ```
 
 ### The background scheduler
 
