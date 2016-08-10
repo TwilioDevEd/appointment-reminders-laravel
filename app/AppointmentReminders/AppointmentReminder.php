@@ -4,6 +4,7 @@ namespace App\AppointmentReminders;
 
 use Illuminate\Log;
 use Carbon\Carbon;
+use Twilio\Rest\Client;
 
 class AppointmentReminder
 {
@@ -19,9 +20,9 @@ class AppointmentReminder
         $twilioConfig = config('services.twilio');
         $accountSid = $twilioConfig['twilio_account_sid'];
         $authToken = $twilioConfig['twilio_auth_token'];
-        $this->sendingNumber = $twilioConfig['twilio_sending_number'];
+        $this->sendingNumber = $twilioConfig['twilio_number'];
 
-        $this->twilioClient = new \Services_Twilio($accountSid, $authToken);
+        $this->twilioClient = new Client($accountSid, $authToken);
     }
 
     /**
@@ -66,11 +67,11 @@ class AppointmentReminder
      */
     private function _sendMessage($number, $content)
     {
-        $this->twilioClient->account->messages->create(
+        $this->twilioClient->messages->create(
+            $number,
             array(
-                "From" => $this->sendingNumber,
-                "To" => $number,
-                "Body" => $content,
+                "from" => $this->sendingNumber,
+                "body" => $content
             )
         );
     }

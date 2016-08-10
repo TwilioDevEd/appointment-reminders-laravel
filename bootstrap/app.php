@@ -42,8 +42,6 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-Dotenv::required(['TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN', 'TWILIO_SENDING_NUMBER']);
-
 /*
 |--------------------------------------------------------------------------
 | Return The Application
