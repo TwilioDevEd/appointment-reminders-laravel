@@ -14,31 +14,34 @@
 appointments for customers at a date in future, and send out reminders for
 those appointments in a background job that runs every few minutes. </p>
 <p>In this tutorial, we&#39;ll point out the key bits of code that make this application
-work. If you&#39;d like to run the code yourself, check out the instructions in
-the README file for <a href="https://github.com/TwilioDevEd/appointment-reminders-laravel">this application on GitHub</a>.</p>
+work. <a href="https://github.com/TwilioDevEd/appointment-reminders-laravel">Check out the project README on GitHub</a>
+to see how to run the code yourself. </p>
 <p>Let&#39;s get started! Click the right arrow above to advance to the next code snippet.</p>
 <hr>
-<p><strong>See Also:</strong>
-<a href="https://www.twilio.com/docs/quickstart/php/sms/sending-via-rest">Twilio PHP Quick Start</a>,
-<a href="https://twilio-php.readthedocs.org/en/latest/">Twilio PHP Helper Library</a>,
-<a href="https://www.twilio.com/docs/api">Twilio REST API docs</a>, 
-<a href="http://laravel.com/docs/5.1">Laravel 5 Docs</a>,
-<a href="http://laravel.com/docs/5.1/eloquent">Eloquent ORM</a>,
-<a href="http://laravel.com/docs/5.1/scheduling">Task Scheduling in Laravel</a></p>
-</div><div data-file=".env.example" data-highlight="21-23" class="step"><h2 id="configure-the-application-to-use-twilio">Configure the application to use Twilio</h2>
+<p><strong>See Also:</strong> </p>
+<ul>
+<li><a href="https://www.twilio.com/docs/quickstart/php/sms/sending-via-rest">Twilio PHP Quick Start</a></li>
+<li><a href="https://twilio-php.readthedocs.org/en/latest/">Twilio PHP Helper Library</a></li>
+<li><a href="https://www.twilio.com/docs/api">Twilio REST API docs</a></li>
+<li><a href="http://laravel.com/docs/5.1">Laravel 5 Docs</a></li>
+<li><a href="http://laravel.com/docs/5.1/eloquent">Eloquent ORM</a></li>
+<li><a href="http://laravel.com/docs/5.1/scheduling">Task Scheduling in Laravel</a></li>
+</ul>
+</div><div data-file=".env.example" data-highlight="10-17" class="step"><h2 id="configure-the-application-to-use-twilio">Configure the application to use Twilio</h2>
 <p>Before we can use the Twilio API to send reminder text messages, we need to 
-configure our account credentials. <a href="https://www.twilio.com/user/account/voice">These can be found on your Twilio dashboard</a>.
-You&#39;ll also need an SMS-enabled phone number - you can 
-<a href="https://www.twilio.com/user/account/phone-numbers/incoming">find or purchase a new one to use here</a>.</p>
+configure our account credentials. These can be found on your <a href="https://www.twilio.com/console">Twilio dashboard</a>.
+You&#39;ll also need an SMS-enabled phone number - you can find or purchase a new one to use <a href="https://www.twilio.com/user/account/phone-numbers/incoming">here</a>.</p>
 <p>We configure these values using <a href="https://github.com/vlucas/phpdotenv">Dotenv</a>,
 the configuration library of choice for Laravel applications. More information
 on how to configure this application can be found in the <a href="https://github.com/TwilioDevEd/appointment-reminders-laravel">project README</a>.</p>
 <hr>
-<p><strong>See Also:</strong>
-<a href="http://laravel.com/docs/5.1/installation#configuration">Configuring Laravel Applications</a>,
-<a href="https://github.com/vlucas/phpdotenv">Dotenv library on GitHub</a>,
-<a href="https://www.twilio.com/user/account">Twilio Account Portal (Account SID and Auth Token)</a>,
-<a href="https://www.twilio.com/user/account/phone-numbers/incoming">Your Available Phone Numbers</a></p>
+<p><strong>See Also:</strong> </p>
+<ul>
+<li><a href="http://laravel.com/docs/5.1/installation#configuration">Configuring Laravel Applications</a></li>
+<li><a href="https://github.com/vlucas/phpdotenv">Dotenv library on GitHub</a></li>
+<li><a href="https://www.twilio.com/user/account">Your Account SID and Auth Token</a></li>
+<li><a href="https://www.twilio.com/user/account/phone-numbers/incoming">Your Available Phone Numbers</a></li>
+</ul>
 </div><div data-file="app/Http/Controllers/AppointmentController.php" data-highlight="86-99" class="step"><h2 id="create-a-new-appointment">Create a new appointment</h2>
 <p>In order to send an appointment reminder, we first need to create an
 appointment! In the <a href="http://laravel.com/docs/5.1/controllers">controller</a>, 
@@ -46,28 +49,34 @@ we take information <a href="http://laravel.com/docs/5.1/blade">submitted in a f
 (notably a customer&#39;s name and phone number, plus a time for the appointment 
 in the future) and save it in an <code>Appointment</code> model.</p>
 <hr>
-<p><strong>See Also:</strong>
-<a href="http://laravel.com/docs/5.1/controllers">Laravel Controllers</a>,
-<a href="http://laravel.com/docs/5.1/eloquent">Models in Eloquent ORM</a>,
-<a href="http://laravel.com/docs/5.1/blade">Blade Templates for HTML</a>,
-<a href="http://carbon.nesbot.com/">Carbon date library</a></p>
+<p><strong>See Also:</strong> </p>
+<ul>
+<li><a href="http://laravel.com/docs/5.1/controllers">Laravel Controllers</a></li>
+<li><a href="http://laravel.com/docs/5.1/eloquent">Models in Eloquent ORM</a></li>
+<li><a href="http://laravel.com/docs/5.1/blade">Blade Templates for HTML</a></li>
+<li><a href="http://carbon.nesbot.com/">Carbon date library</a></li>
+</ul>
 </div><div data-file="app/Console/Kernel.php" data-highlight="19-28" class="step"><h2 id="schedule-a-job-to-send-reminders">Schedule a job to send reminders</h2>
 <p>Every ten minutes, we&#39;d like our application to check the appointments database
 to see if any appointments are coming up that require reminders to be sent out.
 We configure both the job code we&#39;d like to run and the interval on which to
 run it here.</p>
 <hr>
-<p><strong>See Also:</strong>
-<a href="http://laravel.com/docs/5.1/scheduling">Task Scheduling in Laravel</a></p>
+<p><strong>See Also:</strong> </p>
+<ul>
+<li><a href="http://laravel.com/docs/5.1/scheduling">Task Scheduling in Laravel</a></li>
+</ul>
 </div><div data-file="app/Console/Commands/SendReminders.php" class="step"><h2 id="create-a-console-command-to-run-the-job">Create a console command to run the job</h2>
 <p>To actually execute our recurring job logic, we create an Artisan console
 command which queries the database for upcoming appointments and sends
 reminders as necessary. As an added bonus, defining our job logic in this
 way allows us to run the reminder job whenever we want from the command line.</p>
 <hr>
-<p><strong>See Also:</strong>
-<a href="http://laravel.com/docs/5.1/artisan">Artisan console commands</a>,
-<a href="http://laravel.com/docs/5.1/scheduling">Task Scheduling in Laravel</a></p>
+<p><strong>See Also:</strong> </p>
+<ul>
+<li><a href="http://laravel.com/docs/5.1/artisan">Artisan console commands</a></li>
+<li><a href="http://laravel.com/docs/5.1/scheduling">Task Scheduling in Laravel</a></li>
+</ul>
 </div><div data-file="app/AppointmentReminders/AppointmentReminder.php" data-highlight="10-25" class="step"><h2 id="find-appointments-that-need-reminders">Find appointments that need reminders</h2>
 <p>Our recurring job uses an instance of the <code>AppointmentReminder</code> class to
 query the database for appointments coming up in the next ten minutes and
@@ -76,29 +85,35 @@ send out reminder messages.</p>
 on the <code>Appointment</code> model. This should give us a list of all appointments with
 a date and time that falls within the next ten minutes.</p>
 <hr>
-<p><strong>See Also:</strong>
-<a href="http://laravel.com/docs/5.1/eloquent#query-scopes">Eloquent ORM query scopes</a></p>
+<p><strong>See Also:</strong> </p>
+<ul>
+<li><a href="http://laravel.com/docs/5.1/eloquent#query-scopes">Eloquent ORM query scopes</a></li>
+</ul>
 </div><div data-file="app/AppointmentReminders/AppointmentReminder.php" data-highlight="19-24" class="step"><h2 id="set-up-a-twilio-api-client">Set up a Twilio API client</h2>
 <p>Also in the <code>AppointmentReminder</code> constructor, we create a
 <a href="https://twilio-php.readthedocs.org/en/latest/usage/rest.html">Twilio REST Client</a> 
 to send out reminders via SMS. We initialize it with the Twilio account credentials
 we configured earlier.</p>
 <hr>
-<p><strong>See Also:</strong>
-<a href="http://laravel.com/docs/5.1/installation#configuration">Accessing configuration values in Laravel</a>,
-<a href="https://twilio-php.readthedocs.org/en/latest/index.html#quickstart">Get Started with the REST API in PHP</a></p>
-</div><div data-file="app/AppointmentReminders/AppointmentReminder.php" data-highlight="41-76" class="step"><h2 id="send-reminder-messages-with-the-twilio-api">Send reminder messages with the Twilio API</h2>
+<p><strong>See Also:</strong> </p>
+<ul>
+<li><a href="http://laravel.com/docs/5.1/installation#configuration">Accessing configuration values in Laravel</a></li>
+<li><a href="https://twilio-php.readthedocs.org/en/latest/index.html#quickstart">Get Started with the REST API in PHP</a></li>
+</ul>
+</div><div data-file="app/AppointmentReminders/AppointmentReminder.php" data-highlight="49-58,68-77" class="step"><h2 id="send-reminder-messages-with-the-twilio-api">Send reminder messages with the Twilio API</h2>
 <p>These two private functions are called for every appointment coming up that
 requires a reminder to be sent.  The first formats the text of the message to
 be sent out. The second actually uses the Twilio REST API client to send out a
 text message.</p>
-<p>We provide a <code>To</code> parameter which is the customer&#39;s phone number, a <code>From</code>
+<p>We provide a <code>to</code> parameter which is the customer&#39;s phone number, a <code>from</code>
 parameter which is a <a href="https://www.twilio.com/user/account/phone-numbers/incoming">number in our account</a>,
-and a <code>Body</code> parameter which contains the text of the message.</p>
+and a <code>body</code> parameter which contains the text of the message.</p>
 <hr>
-<p><strong>See Also:</strong>
-<a href="http://carbon.nesbot.com/docs/#api-formatting">Date Formatting with Carbon</a>,
-<a href="https://twilio-php.readthedocs.org/en/latest/index.html#quickstart">Sending Text Messages in PHP</a></p>
+<p><strong>See Also:</strong> </p>
+<ul>
+<li><a href="http://carbon.nesbot.com/docs/#api-formatting">Date Formatting with Carbon</a></li>
+<li><a href="https://twilio-php.readthedocs.org/en/latest/index.html#quickstart">Sending Text Messages in PHP</a></li>
+</ul>
 </div><div class="step"><h2 id="where-to-next-">Where to next?</h2>
 <p>That&#39;s it! Our Laravel application is all set to send out reminders for
 upcoming appointments. We hope you found this sample application useful. 
@@ -115,10 +130,10 @@ two-factor authentication via text message.</p>
 and what we can do better. See you next time!</p>
 </div></div>
 <div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="app/models/Appointment.php" data-mode="php">PD9waHAKCm5hbWVzcGFjZSBBcHA7CnVzZSBDYXJib25cQ2FyYm9uOwoKdXNlIElsbHVtaW5hdGVcRGF0YWJhc2VcRWxvcXVlbnRcTW9kZWw7CgpjbGFzcyBBcHBvaW50bWVudCBleHRlbmRzIE1vZGVsCnsKICAgIHB1YmxpYyBmdW5jdGlvbiBzY29wZUFwcG9pbnRtZW50c0R1ZSgkcXVlcnkpCiAgICB7CiAgICAgICAgJG5vdyA9IENhcmJvbjo6bm93KCk7CiAgICAgICAgJGluVGVuTWludXRlcyA9IENhcmJvbjo6bm93KCktPmFkZE1pbnV0ZXMoMTApOwogICAgICAgIHJldHVybiAkcXVlcnktPndoZXJlKCdub3RpZmljYXRpb25UaW1lJywgJz49JywgJG5vdykKICAgICAgICAgICAgLT53aGVyZSgnbm90aWZpY2F0aW9uVGltZScsICc8PScsICRpblRlbk1pbnV0ZXMpOwogICAgfQp9Cg==</textarea>
-<textarea class="saurus-file" data-file=".env.example" data-mode="text">QVBQX0VOVj1sb2NhbApBUFBfREVCVUc9dHJ1ZQpBUFBfS0VZPWF6dXA0Y2RwWWtqNng3MWpXMUVjCgpEQl9IT1NUPWxvY2FsaG9zdApEQl9EQVRBQkFTRT1hcHBvaW50bWVudHMKREJfVVNFUk5BTUU9YXBwb2ludG1lbnRzCkRCX1BBU1NXT1JEPWFwcG9pbnRtZW50cwoKQ0FDSEVfRFJJVkVSPWZpbGUKU0VTU0lPTl9EUklWRVI9ZmlsZQpRVUVVRV9EUklWRVI9c3luYwoKTUFJTF9EUklWRVI9c210cApNQUlMX0hPU1Q9bWFpbHRyYXAuaW8KTUFJTF9QT1JUPTI1MjUKTUFJTF9VU0VSTkFNRT1udWxsCk1BSUxfUEFTU1dPUkQ9bnVsbApNQUlMX0VOQ1JZUFRJT049bnVsbAoKVFdJTElPX0FDQ09VTlRfU0lEPQpUV0lMSU9fQVVUSF9UT0tFTj0KVFdJTElPX1NFTkRJTkdfTlVNQkVSPQo=</textarea>
+<textarea class="saurus-file" data-file=".env.example" data-mode="text">QVBQX0VOVj1sb2NhbApBUFBfREVCVUc9dHJ1ZQpBUFBfS0VZPXVmeGhaaVFjS3hpMWVIVm1HcThNd2ZBY1JnWkhKMVFxCgpEQl9IT1NUPWxvY2FsaG9zdApEQl9EQVRBQkFTRT1hcHBvaW50bWVudHMKREJfVVNFUk5BTUU9YXBwb2ludG1lbnRzCkRCX1BBU1NXT1JEPWFwcG9pbnRtZW50cwoKIyBUd2lsaW8gQVBJIGNyZWRlbnRpYWxzCiMgRm91bmQgYXQgaHR0cHM6Ly93d3cudHdpbGlvLmNvbS91c2VyL2FjY291bnQvc2V0dGluZ3MKVFdJTElPX0FDQ09VTlRfU0lEPUFDWFhYWFhYWFhYWFhYWFhYWFhYWFgKVFdJTElPX0FVVEhfVE9LRU49eW91cl90b2tlbgoKIyBUd2lsaW8gcGhvbmUgbnVtYmVyCiMgUHVyY2hhc2Ugb25lIGF0IGh0dHBzOi8vd3d3LnR3aWxpby5jb20vdXNlci9hY2NvdW50L3Bob25lLW51bWJlcnMvaW5jb21pbmcKVFdJTElPX05VTUJFUj15b3VyX3R3aWxpb19udW1iZXIK</textarea>
 <textarea class="saurus-file" data-file="app/Http/Controllers/AppointmentController.php" data-mode="php">PD9waHAKCm5hbWVzcGFjZSBBcHBcSHR0cFxDb250cm9sbGVyczsKCnVzZSBJbGx1bWluYXRlXEh0dHBcUmVxdWVzdDsKdXNlIElsbHVtaW5hdGVcSHR0cFxSZXNwb25zZTsKdXNlIENhcmJvblxDYXJib247Cgp1c2UgQXBwXEh0dHBcUmVxdWVzdHM7CnVzZSBBcHBcSHR0cFxDb250cm9sbGVyc1xDb250cm9sbGVyOwoKY2xhc3MgQXBwb2ludG1lbnRDb250cm9sbGVyIGV4dGVuZHMgQ29udHJvbGxlcgp7CiAgICBwcml2YXRlICRhcHBvaW50bWVudDsKICAgIHByaXZhdGUgJHZhbGlkSW5wdXRDb25kaXRpb25zID0gYXJyYXkoCiAgICAgICAgJ25hbWUnID0+ICdyZXF1aXJlZCcsCiAgICAgICAgJ3Bob25lTnVtYmVyJyA9PiAncmVxdWlyZWR8bWluOjUnLAogICAgICAgICd3aGVuJyA9PiAncmVxdWlyZWQnLAogICAgICAgICd0aW1lem9uZU9mZnNldCcgPT4gJ3JlcXVpcmVkJywKICAgICAgICAnZGVsdGEnID0+ICdyZXF1aXJlZHxudW1lcmljJwogICAgKTsKCiAgICAvKioKICAgICAqIERpc3BsYXkgYSBsaXN0aW5nIG9mIHRoZSByZXNvdXJjZS4KICAgICAqCiAgICAgKiBAcmV0dXJuIFJlc3BvbnNlCiAgICAgKi8KICAgIHB1YmxpYyBmdW5jdGlvbiBpbmRleCgpCiAgICB7CiAgICAgICAgJGFsbEFwcG9pbnRtZW50cyA9IFxBcHBcQXBwb2ludG1lbnQ6Om9yZGVyQnkoJ2lkJywgJ0FTQycpLT5nZXQoKTsKICAgICAgICByZXR1cm4gcmVzcG9uc2UoKS0+dmlldygnYXBwb2ludG1lbnQuaW5kZXgnLCBhcnJheSgnYXB0cycgPT4gJGFsbEFwcG9pbnRtZW50cykpOwogICAgfQoKICAgIC8qKgogICAgICogU2hvdyB0aGUgZm9ybSBmb3IgY3JlYXRpbmcgYSBuZXcgcmVzb3VyY2UuCiAgICAgKgogICAgICogQHJldHVybiBSZXNwb25zZQogICAgICovCiAgICBwdWJsaWMgZnVuY3Rpb24gY3JlYXRlKCkKICAgIHsKICAgICAgICAkYXBwb2ludG1lbnQgPSBuZXcgXEFwcFxBcHBvaW50bWVudDsKICAgICAgICByZXR1cm4gXFZpZXc6Om1ha2UoJ2FwcG9pbnRtZW50LmNyZWF0ZScsIGFycmF5KCdhcHBvaW50bWVudCcgPT4gJGFwcG9pbnRtZW50KSk7CiAgICB9CgogICAgLyoqCiAgICAgKiBTdG9yZSBhIG5ld2x5IGNyZWF0ZWQgcmVzb3VyY2UgaW4gc3RvcmFnZS4KICAgICAqCiAgICAgKiBAcmV0dXJuIFJlc3BvbnNlCiAgICAgKi8KICAgIHB1YmxpYyBmdW5jdGlvbiBzdG9yZShSZXF1ZXN0ICRyZXF1ZXN0KQogICAgewogICAgICAgICRuZXdBcHBvaW50bWVudCA9ICR0aGlzLT5hcHBvaW50bWVudEZyb21SZXF1ZXN0KCRyZXF1ZXN0KTsKICAgICAgICAkbmV3QXBwb2ludG1lbnQtPnNhdmUoKTsKICAgICAgICByZXR1cm4gcmVkaXJlY3QoKS0+cm91dGUoJ2FwcG9pbnRtZW50LmluZGV4Jyk7CiAgICB9CgogICAgLyoqCiAgICAgKiBEZWxldGUgYSByZXNvdXJjZSBpbiBzdG9yYWdlLgogICAgICoKICAgICAqIEByZXR1cm4gUmVzcG9uc2UKICAgICAqLwogICAgcHVibGljIGZ1bmN0aW9uIGRlc3Ryb3koJGlkKSB7CiAgICAgICAgXEFwcFxBcHBvaW50bWVudDo6ZmluZCgkaWQpLT5kZWxldGUoKTsKICAgICAgICByZXR1cm4gcmVkaXJlY3QoKS0+cm91dGUoJ2FwcG9pbnRtZW50LmluZGV4Jyk7CiAgICB9CgogICAgcHVibGljIGZ1bmN0aW9uIGVkaXQoJGlkKSB7CiAgICAgICAgJGFwcG9pbnRtZW50VG9FZGl0ID0gXEFwcFxBcHBvaW50bWVudDo6ZmluZCgkaWQpOwogICAgICAgIHJldHVybiBcVmlldzo6bWFrZSgnYXBwb2ludG1lbnQuZWRpdCcsIGFycmF5KCdhcHBvaW50bWVudCcgPT4gJGFwcG9pbnRtZW50VG9FZGl0KSk7CiAgICB9CgogICAgcHVibGljIGZ1bmN0aW9uIHVwZGF0ZShSZXF1ZXN0ICRyZXF1ZXN0LCAkaWQpIHsKICAgICAgICAkdXBkYXRlZEFwcG9pbnRtZW50ID0gJHRoaXMtPmFwcG9pbnRtZW50RnJvbVJlcXVlc3QoJHJlcXVlc3QpOwogICAgICAgICRleGlzdGluZ0FwcG9pbnRtZW50ID0gXEFwcFxBcHBvaW50bWVudDo6ZmluZCgkaWQpOwoKICAgICAgICAkZXhpc3RpbmdBcHBvaW50bWVudC0+bmFtZSA9ICR1cGRhdGVkQXBwb2ludG1lbnQtPm5hbWU7CiAgICAgICAgJGV4aXN0aW5nQXBwb2ludG1lbnQtPnBob25lTnVtYmVyID0gJHVwZGF0ZWRBcHBvaW50bWVudC0+cGhvbmVOdW1iZXI7CiAgICAgICAgJGV4aXN0aW5nQXBwb2ludG1lbnQtPnRpbWV6b25lT2Zmc2V0ID0gJHVwZGF0ZWRBcHBvaW50bWVudC0+dGltZXpvbmVPZmZzZXQ7CiAgICAgICAgJGV4aXN0aW5nQXBwb2ludG1lbnQtPndoZW4gPSAkdXBkYXRlZEFwcG9pbnRtZW50LT53aGVuOwogICAgICAgICRleGlzdGluZ0FwcG9pbnRtZW50LT5ub3RpZmljYXRpb25UaW1lID0gJHVwZGF0ZWRBcHBvaW50bWVudC0+bm90aWZpY2F0aW9uVGltZTsKCiAgICAgICAgJGV4aXN0aW5nQXBwb2ludG1lbnQtPnNhdmUoKTsKICAgICAgICByZXR1cm4gcmVkaXJlY3QoKS0+cm91dGUoJ2FwcG9pbnRtZW50LmluZGV4Jyk7CiAgICB9CgogICAgcHJpdmF0ZSBmdW5jdGlvbiBhcHBvaW50bWVudEZyb21SZXF1ZXN0KFJlcXVlc3QgJHJlcXVlc3QpIHsKICAgICAgICAkdGhpcy0+dmFsaWRhdGUoJHJlcXVlc3QsICR0aGlzLT52YWxpZElucHV0Q29uZGl0aW9ucyk7CiAgICAgICAgJG5ld0FwcG9pbnRtZW50ID0gbmV3IFxBcHBcQXBwb2ludG1lbnQ7CgogICAgICAgICRuZXdBcHBvaW50bWVudC0+bmFtZSA9ICRyZXF1ZXN0LT5pbnB1dCgnbmFtZScpOwogICAgICAgICRuZXdBcHBvaW50bWVudC0+cGhvbmVOdW1iZXIgPSAkcmVxdWVzdC0+aW5wdXQoJ3Bob25lTnVtYmVyJyk7CiAgICAgICAgJG5ld0FwcG9pbnRtZW50LT50aW1lem9uZU9mZnNldCA9ICRyZXF1ZXN0LT5pbnB1dCgndGltZXpvbmVPZmZzZXQnKTsKICAgICAgICAkbmV3QXBwb2ludG1lbnQtPndoZW4gPSAkcmVxdWVzdC0+aW5wdXQoJ3doZW4nKTsKCiAgICAgICAgJG5vdGlmaWNhdGlvblRpbWUgPSBDYXJib246OnBhcnNlKCRyZXF1ZXN0LT5pbnB1dCgnd2hlbicpKS0+c3ViTWludXRlcygkcmVxdWVzdC0+ZGVsdGEpOwogICAgICAgICRuZXdBcHBvaW50bWVudC0+bm90aWZpY2F0aW9uVGltZSA9ICRub3RpZmljYXRpb25UaW1lOwoKICAgICAgICByZXR1cm4gJG5ld0FwcG9pbnRtZW50OwogICAgfQp9Cg==</textarea>
-<textarea class="saurus-file" data-file="app/Console/Kernel.php" data-mode="php">PD9waHAKCm5hbWVzcGFjZSBBcHBcQ29uc29sZTsKCnVzZSBJbGx1bWluYXRlXENvbnNvbGVcU2NoZWR1bGluZ1xTY2hlZHVsZTsKdXNlIElsbHVtaW5hdGVcRm91bmRhdGlvblxDb25zb2xlXEtlcm5lbCBhcyBDb25zb2xlS2VybmVsOwoKY2xhc3MgS2VybmVsIGV4dGVuZHMgQ29uc29sZUtlcm5lbAp7CiAgICAvKioKICAgICAqIFRoZSBBcnRpc2FuIGNvbW1hbmRzIHByb3ZpZGVkIGJ5IHlvdXIgYXBwbGljYXRpb24uCiAgICAgKgogICAgICogQHZhciBhcnJheQogICAgICovCiAgICBwcm90ZWN0ZWQgJGNvbW1hbmRzID0gWwogICAgICAgICdcQXBwXENvbnNvbGVcQ29tbWFuZHNcU2VuZFJlbWluZGVycycKICAgIF07CgogICAgLyoqCiAgICAgKiBEZWZpbmUgdGhlIGFwcGxpY2F0aW9uJ3MgY29tbWFuZCBzY2hlZHVsZS4KICAgICAqCiAgICAgKiBAcGFyYW0gIFxJbGx1bWluYXRlXENvbnNvbGVcU2NoZWR1bGluZ1xTY2hlZHVsZSAgJHNjaGVkdWxlCiAgICAgKiBAcmV0dXJuIHZvaWQKICAgICAqLwogICAgcHJvdGVjdGVkIGZ1bmN0aW9uIHNjaGVkdWxlKFNjaGVkdWxlICRzY2hlZHVsZSkKICAgIHsKICAgICAgICAkc2NoZWR1bGUtPmNvbW1hbmQoJ3JlbWluZGVyczpzZW5kJyktPmV2ZXJ5VGVuTWludXRlcygpOwogICAgfQp9Cg==</textarea>
+<textarea class="saurus-file" data-file="app/Console/Kernel.php" data-mode="php">PD9waHAKCm5hbWVzcGFjZSBBcHBcQ29uc29sZTsKCnVzZSBJbGx1bWluYXRlXENvbnNvbGVcU2NoZWR1bGluZ1xTY2hlZHVsZTsKdXNlIElsbHVtaW5hdGVcRm91bmRhdGlvblxDb25zb2xlXEtlcm5lbCBhcyBDb25zb2xlS2VybmVsOwoKY2xhc3MgS2VybmVsIGV4dGVuZHMgQ29uc29sZUtlcm5lbAp7CiAgICAvKioKICAgICAqIFRoZSBBcnRpc2FuIGNvbW1hbmRzIHByb3ZpZGVkIGJ5IHlvdXIgYXBwbGljYXRpb24uCiAgICAgKgogICAgICogQHZhciBhcnJheQogICAgICovCiAgICBwcm90ZWN0ZWQgJGNvbW1hbmRzID0gWwogICAgICAgICdcQXBwXENvbnNvbGVcQ29tbWFuZHNcU2VuZFJlbWluZGVycycKICAgIF07CgogICAgLyoqCiAgICAgKiBEZWZpbmUgdGhlIGFwcGxpY2F0aW9uJ3MgY29tbWFuZCBzY2hlZHVsZS4KICAgICAqCiAgICAgKiBAcGFyYW0gIFxJbGx1bWluYXRlXENvbnNvbGVcU2NoZWR1bGluZ1xTY2hlZHVsZSAgJHNjaGVkdWxlCiAgICAgKiBAcmV0dXJuIHZvaWQKICAgICAqLwogICAgcHJvdGVjdGVkIGZ1bmN0aW9uIHNjaGVkdWxlKFNjaGVkdWxlICRzY2hlZHVsZSkKICAgIHsKICAgICAgICAkc2NoZWR1bGUtPmNvbW1hbmQoJ3JlbWluZGVyczpzZW5kJyktPmV2ZXJ5TWludXRlKCk7CiAgICB9Cn0K</textarea>
 <textarea class="saurus-file" data-file="app/Console/Commands/SendReminders.php" data-mode="php">PD9waHAKCm5hbWVzcGFjZSBBcHBcQ29uc29sZVxDb21tYW5kczsKCnVzZSBJbGx1bWluYXRlXENvbnNvbGVcQ29tbWFuZDsKCmNsYXNzIFNlbmRSZW1pbmRlcnMgZXh0ZW5kcyBDb21tYW5kCnsKICAgIC8qKgogICAgICogVGhlIG5hbWUgYW5kIHNpZ25hdHVyZSBvZiB0aGUgY29uc29sZSBjb21tYW5kLgogICAgICoKICAgICAqIEB2YXIgc3RyaW5nCiAgICAgKi8KICAgIHByb3RlY3RlZCAkc2lnbmF0dXJlID0gJ3JlbWluZGVyczpzZW5kJzsKCiAgICAvKioKICAgICAqIFRoZSBjb25zb2xlIGNvbW1hbmQgZGVzY3JpcHRpb24uCiAgICAgKgogICAgICogQHZhciBzdHJpbmcKICAgICAqLwogICAgcHJvdGVjdGVkICRkZXNjcmlwdGlvbiA9ICdTZW5kIHJlbWluZGVycyB1c2luZyBUd2lsaW8nOwoKICAgIC8qKgogICAgICogQ3JlYXRlIGEgbmV3IGNvbW1hbmQgaW5zdGFuY2UuCiAgICAgKgogICAgICogQHJldHVybiB2b2lkCiAgICAgKi8KICAgIHB1YmxpYyBmdW5jdGlvbiBfX2NvbnN0cnVjdCgpCiAgICB7CiAgICAgICAgcGFyZW50OjpfX2NvbnN0cnVjdCgpOwogICAgfQoKICAgIC8qKgogICAgICogRXhlY3V0ZSB0aGUgY29uc29sZSBjb21tYW5kLgogICAgICoKICAgICAqIEByZXR1cm4gdm9pZAogICAgICovCiAgICBwdWJsaWMgZnVuY3Rpb24gaGFuZGxlKCkKICAgIHsKICAgICAgICAkYXBwb2ludG1lbnRSZW1pbmRlciA9IG5ldyBcQXBwXEFwcG9pbnRtZW50UmVtaW5kZXJzXEFwcG9pbnRtZW50UmVtaW5kZXIoKTsKICAgICAgICAkYXBwb2ludG1lbnRSZW1pbmRlci0+c2VuZFJlbWluZGVycygpOwogICAgfQp9Cg==</textarea>
-<textarea class="saurus-file" data-file="app/AppointmentReminders/AppointmentReminder.php" data-mode="php">PD9waHAKCm5hbWVzcGFjZSBBcHBcQXBwb2ludG1lbnRSZW1pbmRlcnM7Cgp1c2UgSWxsdW1pbmF0ZVxMb2c7CnVzZSBDYXJib25cQ2FyYm9uOwoKY2xhc3MgQXBwb2ludG1lbnRSZW1pbmRlcgp7CiAgICAvKioKICAgICAqIENvbnN0cnVjdCBhIG5ldyBBcHBvaW50bWVudFJlbWluZGVyCiAgICAgKgogICAgICogQHBhcmFtIElsbHVtaW5hdGVcU3VwcG9ydFxDb2xsZWN0aW9uICR0d2lsaW9DbGllbnQgVGhlIGNsaWVudCB0byB1c2UgdG8gcXVlcnkgdGhlIEFQSQogICAgICovCiAgICBmdW5jdGlvbiBfX2NvbnN0cnVjdCgpCiAgICB7CiAgICAgICAgJHRoaXMtPmFwcG9pbnRtZW50cyA9IFxBcHBcQXBwb2ludG1lbnQ6OmFwcG9pbnRtZW50c0R1ZSgpLT5nZXQoKTsKCiAgICAgICAgJHR3aWxpb0NvbmZpZyA9IGNvbmZpZygnc2VydmljZXMudHdpbGlvJyk7CiAgICAgICAgJGFjY291bnRTaWQgPSAkdHdpbGlvQ29uZmlnWyd0d2lsaW9fYWNjb3VudF9zaWQnXTsKICAgICAgICAkYXV0aFRva2VuID0gJHR3aWxpb0NvbmZpZ1sndHdpbGlvX2F1dGhfdG9rZW4nXTsKICAgICAgICAkdGhpcy0+c2VuZGluZ051bWJlciA9ICR0d2lsaW9Db25maWdbJ3R3aWxpb19zZW5kaW5nX251bWJlciddOwoKICAgICAgICAkdGhpcy0+dHdpbGlvQ2xpZW50ID0gbmV3IFxTZXJ2aWNlc19Ud2lsaW8oJGFjY291bnRTaWQsICRhdXRoVG9rZW4pOwogICAgfQoKICAgIC8qKgogICAgICogU2VuZCByZW1pbmRlcnMgZm9yIGVhY2ggYXBwb2ludG1lbnQKICAgICAqCiAgICAgKiBAcmV0dXJuIHZvaWQKICAgICAqLwogICAgcHVibGljIGZ1bmN0aW9uIHNlbmRSZW1pbmRlcnMoKQogICAgewogICAgICAgICR0aGlzLT5hcHBvaW50bWVudHMtPmVhY2goCiAgICAgICAgICAgIGZ1bmN0aW9uICgkYXBwb2ludG1lbnQpIHsKICAgICAgICAgICAgICAgICR0aGlzLT5fcmVtaW5kQWJvdXQoJGFwcG9pbnRtZW50KTsKICAgICAgICAgICAgfQogICAgICAgICk7CiAgICB9CgogICAgLyoqCiAgICAgKiBTZW5kcyBhIG1lc3NhZ2UgZm9yIGFuIGFwcG9pbnRtZW50CiAgICAgKgogICAgICogQHBhcmFtIEFwcG9pbnRtZW50ICRhcHBvaW50bWVudCBUaGUgYXBwb2ludG1lbnQgdG8gcmVtaW5kCiAgICAgKgogICAgICogQHJldHVybiB2b2lkCiAgICAgKi8KICAgIHByaXZhdGUgZnVuY3Rpb24gX3JlbWluZEFib3V0KCRhcHBvaW50bWVudCkKICAgIHsKICAgICAgICAkcmVjaXBpZW50TmFtZSA9ICRhcHBvaW50bWVudC0+bmFtZTsKICAgICAgICAkdGltZSA9IENhcmJvbjo6cGFyc2UoJGFwcG9pbnRtZW50LT53aGVuLCAnVVRDJykKICAgICAgICAgICAgICAtPnN1Yk1pbnV0ZXMoJGFwcG9pbnRtZW50LT50aW1lem9uZU9mZnNldCkKICAgICAgICAgICAgICAtPmZvcm1hdCgnZzppIGEnKTsKCiAgICAgICAgJG1lc3NhZ2UgPSAiSGVsbG8gJHJlY2lwaWVudE5hbWUsIHRoaXMgaXMgYSByZW1pbmRlciB0aGF0IHlvdSBoYXZlIGFuIGFwcG9pbnRtZW50IGF0ICR0aW1lISI7CiAgICAgICAgJHRoaXMtPl9zZW5kTWVzc2FnZSgkYXBwb2ludG1lbnQtPnBob25lTnVtYmVyLCAkbWVzc2FnZSk7CiAgICB9CgogICAgLyoqCiAgICAgKiBTZW5kcyBhIHNpbmdsZSBtZXNzYWdlIHVzaW5nIHRoZSBhcHAncyBnbG9iYWwgY29uZmlndXJhdGlvbgogICAgICoKICAgICAqIEBwYXJhbSBzdHJpbmcgJG51bWJlciAgVGhlIG51bWJlciB0byBtZXNzYWdlCiAgICAgKiBAcGFyYW0gc3RyaW5nICRjb250ZW50IFRoZSBjb250ZW50IG9mIHRoZSBtZXNzYWdlCiAgICAgKgogICAgICogQHJldHVybiB2b2lkCiAgICAgKi8KICAgIHByaXZhdGUgZnVuY3Rpb24gX3NlbmRNZXNzYWdlKCRudW1iZXIsICRjb250ZW50KQogICAgewogICAgICAgICR0aGlzLT50d2lsaW9DbGllbnQtPmFjY291bnQtPm1lc3NhZ2VzLT5jcmVhdGUoCiAgICAgICAgICAgIGFycmF5KAogICAgICAgICAgICAgICAgIkZyb20iID0+ICR0aGlzLT5zZW5kaW5nTnVtYmVyLAogICAgICAgICAgICAgICAgIlRvIiA9PiAkbnVtYmVyLAogICAgICAgICAgICAgICAgIkJvZHkiID0+ICRjb250ZW50LAogICAgICAgICAgICApCiAgICAgICAgKTsKICAgIH0KfQ==</textarea>
+<textarea class="saurus-file" data-file="app/AppointmentReminders/AppointmentReminder.php" data-mode="php">PD9waHAKCm5hbWVzcGFjZSBBcHBcQXBwb2ludG1lbnRSZW1pbmRlcnM7Cgp1c2UgSWxsdW1pbmF0ZVxMb2c7CnVzZSBDYXJib25cQ2FyYm9uOwp1c2UgVHdpbGlvXFJlc3RcQ2xpZW50OwoKY2xhc3MgQXBwb2ludG1lbnRSZW1pbmRlcgp7CiAgICAvKioKICAgICAqIENvbnN0cnVjdCBhIG5ldyBBcHBvaW50bWVudFJlbWluZGVyCiAgICAgKgogICAgICogQHBhcmFtIElsbHVtaW5hdGVcU3VwcG9ydFxDb2xsZWN0aW9uICR0d2lsaW9DbGllbnQgVGhlIGNsaWVudCB0byB1c2UgdG8gcXVlcnkgdGhlIEFQSQogICAgICovCiAgICBmdW5jdGlvbiBfX2NvbnN0cnVjdCgpCiAgICB7CiAgICAgICAgJHRoaXMtPmFwcG9pbnRtZW50cyA9IFxBcHBcQXBwb2ludG1lbnQ6OmFwcG9pbnRtZW50c0R1ZSgpLT5nZXQoKTsKCiAgICAgICAgJHR3aWxpb0NvbmZpZyA9IGNvbmZpZygnc2VydmljZXMudHdpbGlvJyk7CiAgICAgICAgJGFjY291bnRTaWQgPSAkdHdpbGlvQ29uZmlnWyd0d2lsaW9fYWNjb3VudF9zaWQnXTsKICAgICAgICAkYXV0aFRva2VuID0gJHR3aWxpb0NvbmZpZ1sndHdpbGlvX2F1dGhfdG9rZW4nXTsKICAgICAgICAkdGhpcy0+c2VuZGluZ051bWJlciA9ICR0d2lsaW9Db25maWdbJ3R3aWxpb19udW1iZXInXTsKCiAgICAgICAgJHRoaXMtPnR3aWxpb0NsaWVudCA9IG5ldyBDbGllbnQoJGFjY291bnRTaWQsICRhdXRoVG9rZW4pOwogICAgfQoKICAgIC8qKgogICAgICogU2VuZCByZW1pbmRlcnMgZm9yIGVhY2ggYXBwb2ludG1lbnQKICAgICAqCiAgICAgKiBAcmV0dXJuIHZvaWQKICAgICAqLwogICAgcHVibGljIGZ1bmN0aW9uIHNlbmRSZW1pbmRlcnMoKQogICAgewogICAgICAgICR0aGlzLT5hcHBvaW50bWVudHMtPmVhY2goCiAgICAgICAgICAgIGZ1bmN0aW9uICgkYXBwb2ludG1lbnQpIHsKICAgICAgICAgICAgICAgICR0aGlzLT5fcmVtaW5kQWJvdXQoJGFwcG9pbnRtZW50KTsKICAgICAgICAgICAgfQogICAgICAgICk7CiAgICB9CgogICAgLyoqCiAgICAgKiBTZW5kcyBhIG1lc3NhZ2UgZm9yIGFuIGFwcG9pbnRtZW50CiAgICAgKgogICAgICogQHBhcmFtIEFwcG9pbnRtZW50ICRhcHBvaW50bWVudCBUaGUgYXBwb2ludG1lbnQgdG8gcmVtaW5kCiAgICAgKgogICAgICogQHJldHVybiB2b2lkCiAgICAgKi8KICAgIHByaXZhdGUgZnVuY3Rpb24gX3JlbWluZEFib3V0KCRhcHBvaW50bWVudCkKICAgIHsKICAgICAgICAkcmVjaXBpZW50TmFtZSA9ICRhcHBvaW50bWVudC0+bmFtZTsKICAgICAgICAkdGltZSA9IENhcmJvbjo6cGFyc2UoJGFwcG9pbnRtZW50LT53aGVuLCAnVVRDJykKICAgICAgICAgICAgICAtPnN1Yk1pbnV0ZXMoJGFwcG9pbnRtZW50LT50aW1lem9uZU9mZnNldCkKICAgICAgICAgICAgICAtPmZvcm1hdCgnZzppIGEnKTsKCiAgICAgICAgJG1lc3NhZ2UgPSAiSGVsbG8gJHJlY2lwaWVudE5hbWUsIHRoaXMgaXMgYSByZW1pbmRlciB0aGF0IHlvdSBoYXZlIGFuIGFwcG9pbnRtZW50IGF0ICR0aW1lISI7CiAgICAgICAgJHRoaXMtPl9zZW5kTWVzc2FnZSgkYXBwb2ludG1lbnQtPnBob25lTnVtYmVyLCAkbWVzc2FnZSk7CiAgICB9CgogICAgLyoqCiAgICAgKiBTZW5kcyBhIHNpbmdsZSBtZXNzYWdlIHVzaW5nIHRoZSBhcHAncyBnbG9iYWwgY29uZmlndXJhdGlvbgogICAgICoKICAgICAqIEBwYXJhbSBzdHJpbmcgJG51bWJlciAgVGhlIG51bWJlciB0byBtZXNzYWdlCiAgICAgKiBAcGFyYW0gc3RyaW5nICRjb250ZW50IFRoZSBjb250ZW50IG9mIHRoZSBtZXNzYWdlCiAgICAgKgogICAgICogQHJldHVybiB2b2lkCiAgICAgKi8KICAgIHByaXZhdGUgZnVuY3Rpb24gX3NlbmRNZXNzYWdlKCRudW1iZXIsICRjb250ZW50KQogICAgewogICAgICAgICR0aGlzLT50d2lsaW9DbGllbnQtPm1lc3NhZ2VzLT5jcmVhdGUoCiAgICAgICAgICAgICRudW1iZXIsCiAgICAgICAgICAgIGFycmF5KAogICAgICAgICAgICAgICAgImZyb20iID0+ICR0aGlzLT5zZW5kaW5nTnVtYmVyLAogICAgICAgICAgICAgICAgImJvZHkiID0+ICRjb250ZW50CiAgICAgICAgICAgICkKICAgICAgICApOwogICAgfQp9Cg==</textarea>
 </div>
 </div><div class="saurus-overview"><ul></ul></div></div><div class="saurus-code"><div class="file-path"><span class="crumb-container"></span><i class="fa fa-fw fa-folder"></i></div><div class="saurus-editor"></div></div><div class="saurus-explorer"><div class="saurus-file-list"></div><a href="https://github.com/TwilioDevEd/appointment-reminders-laravel" target="_blank" class="explorer-get-code"> <i class="fa fa-lg fa-github-square"> </i>View Code on GitHub</a></div></div></div></div><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script><script src="ace/ace.js"></script><script src="ace/theme-monokai.js"></script><script src="viewsaurus.js"></script></body></html>

@@ -23,12 +23,12 @@
       * [Eloquent ORM](http://laravel.com/docs/5.1/eloquent)
       * [Task Scheduling in Laravel](http://laravel.com/docs/5.1/scheduling)
 
-  .step(data-file='.env.example', data-highlight='21-23')
+  .step(data-file='.env.example', data-highlight='10-17')
     :markdown
       ## Configure the application to use Twilio
 
       Before we can use the Twilio API to send reminder text messages, we need to 
-      configure our account credentials. These can be found on your [Twilio dashboard](https://www.twilio.com/user/account/voice).
+      configure our account credentials. These can be found on your [Twilio dashboard](https://www.twilio.com/console).
       You'll also need an SMS-enabled phone number - you can find or purchase a new one to use [here](https://www.twilio.com/user/account/phone-numbers/incoming).
 
       We configure these values using [Dotenv](https://github.com/vlucas/phpdotenv),
@@ -126,7 +126,7 @@
       * [Get Started with the REST API in PHP](https://twilio-php.readthedocs.org/en/latest/index.html#quickstart)
 
   .step(data-file='app/AppointmentReminders/AppointmentReminder.php',
-    data-highlight='41-76')
+    data-highlight='49-58,68-77')
     :markdown
       ## Send reminder messages with the Twilio API
 
@@ -135,9 +135,9 @@
       be sent out. The second actually uses the Twilio REST API client to send out a
       text message.
 
-      We provide a `To` parameter which is the customer's phone number, a `From`
+      We provide a `to` parameter which is the customer's phone number, a `from`
       parameter which is a [number in our account](https://www.twilio.com/user/account/phone-numbers/incoming),
-      and a `Body` parameter which contains the text of the message.
+      and a `body` parameter which contains the text of the message.
 
       ---
 
