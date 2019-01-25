@@ -17,7 +17,7 @@ class AppointmentReminder
     {
         $this->appointments = \App\Appointment::appointmentsDue()->get();
 
-        $twilioConfig = config('services.twilio');
+        $twilioConfig =\Config::get('services.twilio');
         $accountSid = $twilioConfig['twilio_account_sid'];
         $authToken = $twilioConfig['twilio_auth_token'];
         $this->sendingNumber = $twilioConfig['twilio_number'];
@@ -48,6 +48,7 @@ class AppointmentReminder
      */
     private function _remindAbout($appointment)
     {
+        echo "I am actually sending something!!!!!";
         $recipientName = $appointment->name;
         $time = Carbon::parse($appointment->when, 'UTC')
               ->subMinutes($appointment->timezoneOffset)

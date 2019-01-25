@@ -1,6 +1,11 @@
-/vendor
 /node_modules
-Homestead.yaml
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
 .env
-
-public/vendor
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
