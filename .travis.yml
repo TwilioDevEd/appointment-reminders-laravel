@@ -5,7 +5,6 @@ addons:
   postgresql: '9.4'
 install:
 - pecl channel-update pecl.php.net
-- pecl install PDO_PGSQL
 - composer install
 env:
   global:
