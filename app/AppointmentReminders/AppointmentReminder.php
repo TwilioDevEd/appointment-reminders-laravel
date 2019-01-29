@@ -48,7 +48,6 @@ class AppointmentReminder
      */
     private function _remindAbout($appointment)
     {
-        echo "I am actually sending something!!!!!";
         $recipientName = $appointment->name;
         $time = Carbon::parse($appointment->when, 'UTC')
               ->subMinutes($appointment->timezoneOffset)
