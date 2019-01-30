@@ -1,5 +1,10 @@
 <?php
 
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -15,7 +20,7 @@ class AppointmentControllerTest extends TestCase
      */
     public function testNewAppointment()
     {
-        Session::start();
+        \Session::start();
         $response = $this->call(
             'POST', '/appointment', ['name' => 'Erich Gamma',
                                      'phoneNumber' => '6692216251',
@@ -39,7 +44,7 @@ class AppointmentControllerTest extends TestCase
 
     public function testNewAppointmentValidation()
     {
-        Session::start();
+        \Session::start();
         $response = $this->call(
             'POST', '/appointment', ['name' => 'Erich Gamma',
                                          'phoneNumber' => '',
@@ -61,7 +66,7 @@ class AppointmentControllerTest extends TestCase
 
     public function testDestroyAppointment()
     {
-        Session::start();
+        \Session::start();
         $newAppointment = new \App\Appointment;
 
         $newAppointment->name = 'Martin Fowler';

@@ -17,7 +17,7 @@ class AppointmentReminder
     {
         $this->appointments = \App\Appointment::appointmentsDue()->get();
 
-        $twilioConfig = config('services.twilio');
+        $twilioConfig =\Config::get('services.twilio');
         $accountSid = $twilioConfig['twilio_account_sid'];
         $authToken = $twilioConfig['twilio_auth_token'];
         $this->sendingNumber = $twilioConfig['twilio_number'];
