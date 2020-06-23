@@ -59,17 +59,20 @@ class AppointmentController extends Controller
      *
      * @return Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         \App\Appointment::find($id)->delete();
         return redirect()->route('appointment.index');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $appointmentToEdit = \App\Appointment::find($id);
         return \View::make('appointment.edit', array('appointment' => $appointmentToEdit));
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $updatedAppointment = $this->appointmentFromRequest($request);
         $existingAppointment = \App\Appointment::find($id);
 
@@ -83,7 +86,8 @@ class AppointmentController extends Controller
         return redirect()->route('appointment.index');
     }
 
-    private function appointmentFromRequest(Request $request) {
+    private function appointmentFromRequest(Request $request)
+    {
         $this->validate($request, $this->validInputConditions);
         $newAppointment = new \App\Appointment;
 
