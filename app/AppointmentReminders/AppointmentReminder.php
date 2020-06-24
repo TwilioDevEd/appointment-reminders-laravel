@@ -13,7 +13,7 @@ class AppointmentReminder
      *
      * @param Illuminate\Support\Collection $twilioClient The client to use to query the API
      */
-    function __construct()
+    public function __construct()
     {
         $this->appointments = \App\Appointment::appointmentsDue()->get();
 

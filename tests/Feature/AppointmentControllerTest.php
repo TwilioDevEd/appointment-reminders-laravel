@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AppointmentControllerTest extends TestCase
 {
+    use DatabaseMigrations;
     use DatabaseTransactions;
 
     /**
@@ -22,7 +23,9 @@ class AppointmentControllerTest extends TestCase
     {
         \Session::start();
         $response = $this->call(
-            'POST', '/appointment', ['name' => 'Erich Gamma',
+            'POST',
+            '/appointment',
+            ['name' => 'Erich Gamma',
                                      'phoneNumber' => '6692216251',
                                      'when' => '2015-07-24T18:00:00.000Z',
                                      'timezoneOffset' => '300',
@@ -46,7 +49,9 @@ class AppointmentControllerTest extends TestCase
     {
         \Session::start();
         $response = $this->call(
-            'POST', '/appointment', ['name' => 'Erich Gamma',
+            'POST',
+            '/appointment',
+            ['name' => 'Erich Gamma',
                                          'phoneNumber' => '',
                                          'when' => '2015-07-24T18:00:00.000Z',
                                          'timezoneOffset' => '300',

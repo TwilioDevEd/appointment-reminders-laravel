@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.main')
 
 @section('content')
     @include('appointment._form', array('heading' => 'Edit appointment',

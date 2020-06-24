@@ -1,29 +1,34 @@
 {
-    "name": "TwilioDevEd/appointment-reminder-laravel",
+    "name": "twilio-labs/appointment-reminder-laravel",
     "type": "project",
     "description": "An SMS reminders sample application",
     "keywords": [
-        "Twilio",
-        "TwilioDevEd",
-        "SMS"
+        "laravel",
+        "twilio"
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.1.3",
-        "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.7.*",
-        "laravel/tinker": "^1.0",
-        "laravelcollective/html": "~5.0",
-        "nesbot/carbon": "~1.19",
-        "twilio/sdk": "^5.0"
+        "php": "^7.2.5",
+        "fideloper/proxy": "^4.2",
+        "fruitcake/laravel-cors": "^1.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "laravel/dusk": "^5.11",
+        "laravel/framework": "^7.0",
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.0",
+        "laravelcollective/html": "6.1",
+        "nesbot/carbon": "2.35",
+        "twilio/sdk": "^6.1"
     },
     "require-dev": {
-        "beyondcode/laravel-dump-server": "^1.0",
-        "filp/whoops": "^2.0",
-        "fzaninotto/faker": "^1.4",
-        "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^2.0",
-        "phpunit/phpunit": "^7.0"
+        "facade/ignition": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "fzaninotto/faker": "^1.9.1",
+        "mockery/mockery": "^1.3.1",
+        "nunomaduro/collision": "^4.1",
+        "beyondcode/laravel-dump-server": "^1.4",
+        "filp/whoops": "^2.7",
+        "phpunit/phpunit": "^8.5"
     },
     "config": {
         "optimize-autoloader": true,
@@ -48,21 +53,11 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        },
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "post-install-cmd": [
-            "php artisan clear-compiled"
-        ],
-        "pre-update-cmd": [
-            "php artisan clear-compiled"
-        ],
-        "post-update-cmd": [],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -72,6 +67,12 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "lint": [
+            "php vendor/bin/php-cs-fixer fix --dry-run"
+        ],
+        "format": [
+            "php vendor/bin/php-cs-fixer fix"
         ]
     }
 }
