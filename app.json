@@ -1,6 +1,6 @@
 {
-  "name": "Sample App powered by Twilio",
-  "description": "A template for getting started with Twilio and Laravel/PHP.",
+  "name": "Appointment Reminder Laravel",
+  "description": "Notify customers of upcoming appointments",
   "website": "https://twilio.com",
   "logo": "https://www.twilio.com/marketing/bundles/marketing/img/favicons/favicon_114.png",
   "success_url": "/",
