@@ -28,7 +28,7 @@
         "nunomaduro/collision": "^4.1",
         "beyondcode/laravel-dump-server": "^1.4",
         "filp/whoops": "^2.7",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^9.2"
     },
     "config": {
         "optimize-autoloader": true,
