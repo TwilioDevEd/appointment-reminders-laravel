@@ -17,7 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "laravelcollective/html": "6.1",
-        "nesbot/carbon": "2.43.0",
+        "nesbot/carbon": "2.44.0",
         "twilio/sdk": "^6.1"
     },
     "require-dev": {
